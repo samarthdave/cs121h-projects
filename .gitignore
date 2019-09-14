@@ -1,0 +1,9 @@
+# ignore all files
+*
+# except those that have an extension
+!/**/
+!*.*
+
+# also except makefiles
+!makefile
+!Makefile
