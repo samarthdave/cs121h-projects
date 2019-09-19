@@ -49,7 +49,7 @@ void printCalendar(int month, int year) {
   string days_of_week[7] = {
     "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
   };
-  string dash_bar = "|---------------------------|";
+  string dash_bar = "-----------------------------";
   string days_of_week_string = "|Sun|Mon|Tue|Wed|Thu|Fri|Sat|";
 
   cout << dash_bar << endl;
@@ -103,7 +103,8 @@ void printCalendar(int month, int year) {
       for (int i = 0; i < 7; i++) {
         cout << (isSpecialDate(month, currentDate - (7-i)) ? " * |" : "   |");
       }
-      cout << "\n|---------------------------|" << endl;
+      cout << "\n" << dash_bar << endl;
+      // cout << endl;
       hasBeen7 = 0;
     }
     
