@@ -6,6 +6,7 @@ using namespace std;
 void printCalendar(int month, int year);
 bool isLeapYear(int year);
 unsigned dayOfWeek(unsigned year, unsigned month, unsigned day);
+bool isSpecialDate(int month, int date);
 
 int main(int argc, char** argv) {
   if (argc != 3) {
@@ -33,7 +34,7 @@ int main(int argc, char** argv) {
 
 void printCalendar(int month, int year) {
   // number valid validation
-  if (month < 0 || month > 12) {
+  if (month < 1 || month > 12) {
     cout << "Invalid month input" << endl;
     return;
   }
@@ -73,7 +74,7 @@ void printCalendar(int month, int year) {
 
   // usually 5 "rows"/weeks but can rarely be 4 rows (ex. Feb 2026)
   int rowsInMonth = (month == 1 && firstDay == 0 && !is_leap) ? 4 : 5;
-  int daysInMonth = days[month];
+  int daysInMonth = days[month - 1];
 
   // loop through start date 7 times
   int currentDate = 1;
@@ -85,9 +86,24 @@ void printCalendar(int month, int year) {
     hasBeen7++;
   }
 
-  while (currentDate <= daysInMonth) {
+  while (true) {
+    if (currentDate > daysInMonth) {
+      // print out the rest of the blocks
+      cout << "|";
+      // remaining of the ROW (if the last row is empty)
+      for (int i = 0; i < (7 - hasBeen7); i++) {
+        cout << "   |";
+      }
+
+      break;
+    }
     if (hasBeen7 >= 7) {
-      cout << "|" << endl;
+      cout << "|\n" << "|";
+      // is special date
+      for (int i = 0; i < 7; i++) {
+        cout << (isSpecialDate(month, currentDate - (7-i)) ? " * |" : "   |");
+      }
+      cout << "\n|---------------------------|" << endl;
       hasBeen7 = 0;
     }
     
@@ -98,6 +114,28 @@ void printCalendar(int month, int year) {
     hasBeen7++;
     currentDate++;
   }
+  // final block for dates
+  cout << endl;
+
+  // last row of dates with buffer and another asterisk location
+  cout << '|';
+  for (int i = 0; i < 7; i++) {
+    cout << (isSpecialDate(month, daysInMonth - (hasBeen7 - i) + 1) ? " * |" : "   |");
+  }
+  // empty line for aesthetic
+  cout << endl;
+}
+
+bool isSpecialDate(int month, int date) {
+  if (month < 1 || month > 12) {
+    cout << "Invalid month input" << endl;
+    return false;
+  }
+
+  if (month == 7 && date == 4) return true; // July 4th - Independence day
+  if (month == 10 && date == 31) return true; // Oct 31 - Halloween
+  if (month == 12 && date == 25) return true; // Dec 25 - Christmas
+  return false;
 }
 
 bool isLeapYear(int year) {
