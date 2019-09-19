@@ -1,0 +1,114 @@
+---------------------
+CSCE 121H - Fall 2019
+Project 1 - Calendar
+due: Fri, 9/20/2019, 8:00 am
+---------------------
+
+Write a C++ program that takes the month (1-12) and year on the command-line,
+and prints out a format calendar (in ASCII) for that month.
+
+Read the month and year as command-line args.
+
+Also, flag the following holidays with an asterisk:
+  July 4 each year (Independence Day)
+  October 31 each year (Halloween)
+  December 25 each year (Christmas)
+Just incorporate the checks for these directly in your code (i.e. in 'if' statements).
+
+Part of the objective of this exercise is to learn how to formatted printing,
+to get the columns aligned.
+
+Part of the challenge of this assignment is figuring out the algorithm
+for determining what day of the week any given month starts on.
+
+Here is an example:
+
+> ./calendar 10 2019
+Calendar for October 2019
+|---------------------------|
+|Sun|Mon|Tue|Wed|Thu|Fri|Sat|
+|---------------------------|
+|   |   |  1|  2|  3|  4|  5|
+|   |   |   |   |   |   |   |
+|---------------------------|
+|  6|  7|  8|  9| 10| 11| 12|
+|   |   |   |   |   |   |   |
+|---------------------------|
+| 13| 14| 15| 16| 17| 18| 19|
+|   |   |   |   |   |   |   |
+|---------------------------|
+| 20| 21| 22| 23| 24| 25| 26|
+|   |   |   |   |   |   |   |
+|---------------------------|
+| 27| 28| 29| 30| 31|   |   |
+|   |   |   |   | * |   |   |
+|---------------------------|
+
+Last time the Dallas Cowboys won the Superbowl was on 1/28/1996 (a Sunday).
+
+> ./calendar 1 1996
+Calendar for January 1996
+|---------------------------|
+|Sun|Mon|Tue|Wed|Thu|Fri|Sat|
+|---------------------------|
+|   |  1|  2|  3|  4|  5|  6|
+|   |   |   |   |   |   |   |
+|---------------------------|
+|  7|  8|  9| 10| 11| 12| 13|
+|   |   |   |   |   |   |   |
+|---------------------------|
+| 14| 15| 16| 17| 18| 19| 20|
+|   |   |   |   |   |   |   |
+|---------------------------|
+| 21| 22| 23| 24| 25| 26| 27|
+|   |   |   |   |   |   |   |
+|---------------------------|
+| 28| 29| 30| 31|   |   |   |
+|   |   |   |   |   |   |   |
+|---------------------------|
+
+Note, you can check your results against the 'cal' command in Linux:
+
+> cal 1 1996
+    January 1996      
+Su Mo Tu We Th Fr Sa  
+    1  2  3  4  5  6  
+ 7  8  9 10 11 12 13  
+14 15 16 17 18 19 20  
+21 22 23 24 25 26 27  
+28 29 30 31           
+
+
+--------------------------------------------------------
+
+Optional:
+
+1. If you are interested, you could also flag holidays with variable
+dates, like Easter (second Sunday of May) or Thanksgiving (fourth
+Thursday in November).
+
+2. Another challenge is that you might want to make your calendar read in
+a file with specific dates to flag, like other holidays, birthdays,
+meetings or appointments.  You would have to define a file format,
+like "<date> <description>" on each line, and you have to have convert
+the date from a text string to month day and year variables.
+
+For example, mycal.txt:
+
+8/27/19 first day of fall semester classes
+10/28/19 Bill Gates's birthday
+1/28/1996 Last time the Dallas Cowboys won the Superbowl (XXX).
+2/2/2020 Superbowl LIV
+
+
+3. Modify the program to print out the day-of-the-week for any
+arbitrary date (3 args).  For example, here is the first moon landing:
+
+> calendar 7 20 1969 
+Sunday
+
+...and next Valentine's Day:
+
+> calendar 2 14 2020
+Friday
+
