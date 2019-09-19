@@ -5,7 +5,7 @@ using namespace std;
 
 void printCalendar(int month, int year);
 bool isLeapYear(int year);
-unsigned day_of_week(unsigned year, unsigned month, unsigned day);
+unsigned dayOfWeek(unsigned year, unsigned month, unsigned day);
 
 int main(int argc, char** argv) {
   if (argc != 3) {
@@ -23,9 +23,11 @@ int main(int argc, char** argv) {
     return 0;
   }
 
+  // convert string input to ints
   int month = stoi(month_str);
   int year = stoi(year_str);
 
+  // print full calendar
   printCalendar(month, year);
 }
 
@@ -35,24 +37,26 @@ void printCalendar(int month, int year) {
     cout << "Invalid month input" << endl;
     return;
   }
+  // all 12 month strings saved
   string months[12]  = {
     "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
   };
 
   cout << "Calendar for " << months[month - 1] << " " << year << endl;
 
-  // string days_of_week[7] = {
-  //   "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
-  // };
+  // just in case...
+  string days_of_week[7] = {
+    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+  };
   string dash_bar = "|---------------------------|";
-  string days_of_week = "|Sun|Mon|Tue|Wed|Thu|Fri|Sat|";
+  string days_of_week_string = "|Sun|Mon|Tue|Wed|Thu|Fri|Sat|";
 
   cout << dash_bar << endl;
-  cout << days_of_week << endl;
+  cout << days_of_week_string << endl;
   cout << dash_bar << endl;
 
   // get start date
-  // known start values
+  // known month values with day count in each
   int days[] = {
     31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
   };
@@ -65,9 +69,35 @@ void printCalendar(int month, int year) {
   }
 
   // formatted string output
-  int first_day = day_of_week(month, 1, year);
+  int firstDay = dayOfWeek(month, 1, year);
 
-  cout << "the first day is " << first_day << endl;
+  // usually 5 "rows"/weeks but can rarely be 4 rows (ex. Feb 2026)
+  int rowsInMonth = (month == 1 && firstDay == 0 && !is_leap) ? 4 : 5;
+  int daysInMonth = days[month];
+
+  // loop through start date 7 times
+  int currentDate = 1;
+  int hasBeen7 = 0;
+
+  // first few blank boxes (if any)
+  for (int i = 0; i < firstDay; i++) {
+    cout << "|   ";
+    hasBeen7++;
+  }
+
+  while (currentDate <= daysInMonth) {
+    if (hasBeen7 >= 7) {
+      cout << "|" << endl;
+      hasBeen7 = 0;
+    }
+    
+    // print text output/cell
+    string extraSpace = (currentDate >= 10) ? "" : " ";
+    cout << "| " << extraSpace << currentDate;
+
+    hasBeen7++;
+    currentDate++;
+  }
 }
 
 bool isLeapYear(int year) {
@@ -77,7 +107,7 @@ bool isLeapYear(int year) {
 // Algorithm:
 // tondering.dk/claus/cal/chrweek.php#calcdow
 // Returns: 0=Sunday, 1=Monday, etc
-unsigned day_of_week(unsigned month, unsigned day, unsigned year) {
+unsigned dayOfWeek(unsigned month, unsigned day, unsigned year) {
   unsigned a, y, m;
   a = (14 - month) / 12;
   y = year - a;
