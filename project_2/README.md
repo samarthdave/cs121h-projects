@@ -1,5 +1,5 @@
 ---------------------
-### Project 2 - Histogram
+### [Project 2 - Histogram](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project2.txt)
 ### due: Fri, 9/27/19, 8:00am
 ---------------------
 

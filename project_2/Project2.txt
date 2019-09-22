@@ -1,0 +1,80 @@
+---------------------
+CSCE 121H - Fall 2019
+Project 2 - Histogram
+due: Fri, 9/27/19, 8:00am
+---------------------
+
+Write a C++ program that reads a list of numbers in from a file,
+prints out some statistics (count, range, mean, standard deviation),
+and then prints a histogram of the values in ASCII.
+The histogram should span between the min and max of the values,
+and have 20 evenly spaced bins (for now).
+
+The filename should be given on the command-line.
+Assume it has one value on each line.
+
+Do the calculation of the statistics yourself; don't use library functions.
+
+Since the input file could have an arbitrary number of values, you
+will have to store them in a dynamic data structure, like a vector.
+An important part of this program is setting up an array or similar
+data structure to count how many items are in each bin (try to do 
+this in one pass).
+
+Here is an example of running on daily temperatures over 3 days in the summer for BCS.
+  hourly weather data: https://w1.weather.gov/data/obhistory/KCLL.html
+
+> histo wx.dat
+num_vals: 72
+mean:     84.6806
+std_dev:  5.91097
+range:    77 - 95
+ 77.00 -  77.90: ****
+ 77.90 -  78.80: ************
+ 78.80 -  79.70: ***
+ 79.70 -  80.60: ***
+ 80.60 -  81.50: ********
+ 81.50 -  82.40: *****
+ 82.40 -  83.30: **
+ 83.30 -  84.20: **
+ 84.20 -  85.10: ***
+ 85.10 -  86.00: 
+ 86.00 -  86.90: *
+ 86.90 -  87.80: ****
+ 87.80 -  88.70: *
+ 88.70 -  89.60: ******
+ 89.60 -  90.50: **
+ 90.50 -  91.40: ***
+ 91.40 -  92.30: **
+ 92.30 -  93.20: ***
+ 93.20 -  94.10: ***
+ 94.10 -  95.00: *****
+
+
+Get your own data:
+
+examples:
+  daily temperature in BCS in a given month
+  aggie football scores over last couple years (or all NCAA games)
+  stock price of Google (GOOG) over the last year
+  exam grade distribution for students in a class
+
+Note: if you have a table of interesting data, you might be able to
+open it as a spreadsheet delete the other columns and save the
+column of interest as a text file.
+
+
+--------------------------------------------------------
+
+Optional:
+
+1. Add a command line flag to specify the number of bins.
+
+2. Other options might be the starting value, the bin size.
+
+3. If the total number of observations is very large (like > 10,000), you
+might want to divide the counts by a scaling factor, so the output doesn't
+have too many asterisks.
+
+4. If your input file has multiple columns (separated by tab or space), then
+allow the user to indicate which column to read.
