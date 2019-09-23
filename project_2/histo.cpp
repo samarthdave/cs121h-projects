@@ -25,14 +25,21 @@ int main(int argc, char** argv) {
   // read file and loop over contents to calculate mean, std-dev, etc
   int count = 0;
   int sum = 0;
-  int min = -1, max = -1;
+
+  // use a boolean to ensure correct min, max values
+  // instead of assuming -1
+  bool firstRun = true;
+  int min, max;
   vector<int> temperatures;
 
   int num;
   // append all the values ot the temps vector
   while (input >> num) {
-    if (min == -1) min = num;
-    if (max == -1) max = num;
+    if (firstRun) {
+      min = num;
+      max = num;
+      firstRun = false;
+    }
     // comparisons for max and min
     if (num > max) {
       max = num;
