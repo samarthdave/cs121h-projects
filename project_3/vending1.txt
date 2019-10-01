@@ -1,0 +1,6 @@
+quarter 10 0.25
+nickel  20 0.05
+dime    20 0.10
+coke    10 1.00
+gum      5 0.50
+chips   15 0.75
