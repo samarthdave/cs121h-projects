@@ -1,6 +1,8 @@
 quarter  5 0.25
 nickel   6 0.05
 dime     5 0.10
-coke    10 0.90
+
+oreos   10 0.90
 gum      5 0.50
-chips   15 0.75
+kit kat  5 0.75
+chips   15 0.80

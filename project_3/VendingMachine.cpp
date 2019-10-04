@@ -2,12 +2,13 @@
 #include <boost/algorithm/string.hpp> // lowercase strings
 #include <fstream> // read file
 #include <cstdio> // printf
+#include <cmath> // fabs
 #include <vector> // duh...
 
 // coin constants
-#define QUARTER 0.25
-#define DIME 0.10
-#define NICKEL 0.05
+// #define QUARTER 0.25
+// #define DIME 0.10
+// #define NICKEL 0.05
 // defined penny just in case I ever want to continue
 #define PENNY 0.01
 
@@ -68,6 +69,10 @@ int main(int argc, char* argv[]) {
   
   // start off with 0 in the machine
   double balance = 1.00;
+  // CONSTANTS
+  double QUARTER = 0.25;
+  double DIME = 0.10;
+  double NICKEL = 0.05;
 
   // choices: "press", "quit", "change", or coins
   string selection = "";
@@ -133,6 +138,7 @@ int main(int argc, char* argv[]) {
       if (prevSelection == "press") {
         // buy the item / selection
         buyItem(selection, balance, vendingItems);
+        dispenseChange(balance, vendingItems);
       } else {
         cout << "Would you like to buy " << selection << "? If so, type \"press " << selection << "\"." << endl;
       }
@@ -181,15 +187,12 @@ void dispenseChange(double &balance, vector<VendingItem> &vendingItems) {
   VendingItem &dime = vendingItems.at(dimeIndex);
   VendingItem &nickel = vendingItems.at(nickelIndex);
 
-  // cout << quarter.count << " " << dime.count  << " " << nickel.count << endl;
-
   // check what combinations of coins that you get back (dimes, nickels, etc)
   int quartersNeeded = 0;
   int dimesNeeded = 0;
   int nickelsNeeded = 0;
 
   double balanceCopy = balance;
-  cout << balanceCopy << endl;
   // get smallest value of coins that we can get
   quartersNeeded = balanceCopy / 0.25;
   balanceCopy -= (quartersNeeded * 0.25);
@@ -201,58 +204,50 @@ void dispenseChange(double &balance, vector<VendingItem> &vendingItems) {
   balanceCopy -= (nickelsNeeded * 0.05);
 
   // now increment dimes, etc if not enough quarters
-  
-  int addDimes = 0;
-  int addNickels = 0;
-  if (quartersNeeded > quarter.count) {
-    // get deficient count of quarters
-    int quarterDeficiency = quartersNeeded - quarter.count;
-    balance = balance - (0.25 * quarter.count);
-    for (int i = 0; i < quarter.count; i++) cout << "Change: quarter" << endl;
-    quarter.count = 0;
+  double QUARTER = 0.25;
+  double DIME = 0.10;
+  double NICKEL = 0.05;
+
+  while(true) {
+    if ((balance - QUARTER > 0 || fabs(balance - QUARTER) < balance * 0.001)
+      && quarter.count > 0) {
+
+      balance -= QUARTER;
+      cout << "change: quarter" << endl;
+      quarter.count -= 1;
+    } else {
+      break;
+    }
+  }
+
+  while(true) {
+    // cout << "state: " << (balance - DIME) << ' ' << balance - DIME << ' ' << (dime.count > 0) << endl;
+    if ((balance - DIME > 0 || fabs(balance - DIME) < balance * 0.001)
+      && dime.count > 0) {
+    // nope:
+    // if (balance - DIME >= 0 && dime.count > 0) {
+      balance -= DIME;
+      cout << "change: dime" << endl;
+      dime.count -= 1;
+    } else {
+      break;
+    }
+  }
+
+  while(true) {
+    // cout << "2nd: " << (balance - NICKEL >= 0) << ' ' << (nickel.count > 0) << endl;
     
-    // convert a quarter to dimes and nickels
-    addNickels = (int)((0.25 * quarterDeficiency) / 0.05);
-    addDimes = (int)(addNickels / 2);
-    addNickels = (int)(addNickels % 2);
-  } else {
-    balance -= (0.25 * quartersNeeded);
-    for (int i = 0; i < quartersNeeded; i++) cout << "Change: quarter" << endl;
-  }
-  
-  dimesNeeded += addDimes;
-  nickelsNeeded += addNickels;
-  addDimes = 0;
-  addNickels = 0;
+    // turns out subtraction isn't friendly in C++
+    // if (balance - NICKEL >= 0 && nickel.count > 0) {
+    if ((balance - NICKEL > 0 || fabs(balance - NICKEL) < balance * 0.001)
+      && nickel.count > 0) {
 
-  // step 2: dimes
-  if (dimesNeeded > dime.count) {
-    // get deficient count of dimes
-    int dimeDeficiency = dimesNeeded - dime.count;
-    balance = balance - (0.1 * dime.count);
-    for (int i = 0; i < dime.count; i++) cout << "Change: dime" << endl;
-    dime.count = 0;
-
-    // convert dimes to nickels
-    addNickels = (int)((0.1 * dimeDeficiency) / 0.05);
-  } else {
-    balance -= (0.1 * dimesNeeded);
-    for (int i = 0; i < dimesNeeded; i++) cout << "Change: dime" << endl;
-  }
-  nickelsNeeded += addNickels;
-
-  // now time for the nickels (no luck)
-  // but this should rarely happen where the machine has increments of 0.01
-  // or oddly priced items??
-  if (nickelsNeeded > nickel.count) {
-    int nickelDeficiency = nickelsNeeded - nickel.count;
-    balance = balance - (0.05 * nickel.count);
-    for (int i = 0; i < nickel.count; i++) cout << "Change: nickel" << endl;
-    nickel.count = 0;
-    cout << "Sorry! Machine is short of " << nickelDeficiency << " nickels." << endl;
-  } else {
-    balance -= (0.05 * nickelsNeeded);
-    for (int i = 0; i < nickelsNeeded; i++) cout << "Change: nickel" << endl;
+      balance -= NICKEL;
+      cout << "change: nickel!!" << endl;
+      nickel.count -= 1;
+    } else {
+      break;
+    }
   }
 
 }
@@ -330,3 +325,60 @@ bool isCoin(string &selection) {
 void drawDivider() {
   cout << "----------------------------------" << endl;
 }
+
+/*
+
+int addDimes = 0;
+  int addNickels = 0;
+  if (quartersNeeded > quarter.count) {
+    // get deficient count of quarters
+    int quarterDeficiency = quartersNeeded - quarter.count;
+    balance = balance - (0.25 * quarter.count);
+    for (int i = 0; i < quarter.count; i++) cout << "Change: quarter" << endl;
+    quarter.count = 0;
+    
+    // convert a quarter to dimes and nickels
+    addNickels = (int)((0.25 * quarterDeficiency) / 0.05);
+    addDimes = (int)(addNickels / 2);
+    addNickels = (int)(addNickels % 2);
+  } else {
+    balance -= (0.25 * quartersNeeded);
+    for (int i = 0; i < quartersNeeded; i++) cout << "Change: quarter" << endl;
+  }
+  
+  dimesNeeded += addDimes;
+  nickelsNeeded += addNickels;
+  addDimes = 0;
+  addNickels = 0;
+
+  // step 2: dimes
+  if (dimesNeeded > dime.count) {
+    // get deficient count of dimes
+    int dimeDeficiency = dimesNeeded - dime.count;
+    balance = balance - (0.1 * dime.count);
+    for (int i = 0; i < dime.count; i++) cout << "Change: dime" << endl;
+    dime.count = 0;
+
+    // convert dimes to nickels
+    addNickels = (int)((0.1 * dimeDeficiency) / 0.05);
+  } else {
+    balance -= (0.1 * dimesNeeded);
+    for (int i = 0; i < dimesNeeded; i++) cout << "Change: dime" << endl;
+  }
+  nickelsNeeded += addNickels;
+
+  // now time for the nickels (no luck)
+  // but this should rarely happen where the machine has increments of 0.01
+  // or oddly priced items??
+  if (nickelsNeeded > nickel.count) {
+    int nickelDeficiency = nickelsNeeded - nickel.count;
+    balance = balance - (0.05 * nickel.count);
+    for (int i = 0; i < nickel.count; i++) cout << "Change: nickel" << endl;
+    nickel.count = 0;
+    cout << "Sorry! Machine is short of " << nickelDeficiency << " nickels." << endl;
+  } else {
+    balance -= (0.05 * nickelsNeeded);
+    for (int i = 0; i < nickelsNeeded; i++) cout << "Change: nickel" << endl;
+  }
+
+  */
