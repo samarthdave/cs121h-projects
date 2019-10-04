@@ -1,5 +1,4 @@
 #include <iostream>
-#include <boost/algorithm/string.hpp> // lowercase strings
 #include <fstream> // read file
 #include <cstdio> // printf
 #include <cmath> // fabs
@@ -30,6 +29,7 @@ void drawDivider();
 void printChoices(vector<VendingItem> &vendingItems);
 void dispenseChange(double &balance, vector<VendingItem> &vendingItems);
 void buyItem(string &item, double &balance, vector<VendingItem> &vendingItems);
+char to_lowercase(char c);
 
 int main(int argc, char* argv[]) {
   // NOTE: the "enter input" code handles each word in a sentence
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
   printChoices(vendingItems);
   
   // start off with 0 in the machine
-  double balance = 1.00;
+  double balance = 0.00;
   // CONSTANTS
   double QUARTER = 0.25;
   double DIME = 0.10;
@@ -88,7 +88,11 @@ int main(int argc, char* argv[]) {
     cin >> selection;
     cout << "\nYou entered: '" << selection << "'" << endl;
     // lowercase string input
-    selection = boost::algorithm::to_lower_copy(selection);
+    // selection = boost::algorithm::to_lower_copy(selection);
+    for (char &c: selection) {
+      c = to_lowercase(c);
+    }
+    
 
     // if it is NOT an action and NOT a coin, then it must be a food item
     bool isCoinBool = isCoin(selection);
@@ -326,59 +330,8 @@ void drawDivider() {
   cout << "----------------------------------" << endl;
 }
 
-/*
-
-int addDimes = 0;
-  int addNickels = 0;
-  if (quartersNeeded > quarter.count) {
-    // get deficient count of quarters
-    int quarterDeficiency = quartersNeeded - quarter.count;
-    balance = balance - (0.25 * quarter.count);
-    for (int i = 0; i < quarter.count; i++) cout << "Change: quarter" << endl;
-    quarter.count = 0;
-    
-    // convert a quarter to dimes and nickels
-    addNickels = (int)((0.25 * quarterDeficiency) / 0.05);
-    addDimes = (int)(addNickels / 2);
-    addNickels = (int)(addNickels % 2);
-  } else {
-    balance -= (0.25 * quartersNeeded);
-    for (int i = 0; i < quartersNeeded; i++) cout << "Change: quarter" << endl;
-  }
-  
-  dimesNeeded += addDimes;
-  nickelsNeeded += addNickels;
-  addDimes = 0;
-  addNickels = 0;
-
-  // step 2: dimes
-  if (dimesNeeded > dime.count) {
-    // get deficient count of dimes
-    int dimeDeficiency = dimesNeeded - dime.count;
-    balance = balance - (0.1 * dime.count);
-    for (int i = 0; i < dime.count; i++) cout << "Change: dime" << endl;
-    dime.count = 0;
-
-    // convert dimes to nickels
-    addNickels = (int)((0.1 * dimeDeficiency) / 0.05);
-  } else {
-    balance -= (0.1 * dimesNeeded);
-    for (int i = 0; i < dimesNeeded; i++) cout << "Change: dime" << endl;
-  }
-  nickelsNeeded += addNickels;
-
-  // now time for the nickels (no luck)
-  // but this should rarely happen where the machine has increments of 0.01
-  // or oddly priced items??
-  if (nickelsNeeded > nickel.count) {
-    int nickelDeficiency = nickelsNeeded - nickel.count;
-    balance = balance - (0.05 * nickel.count);
-    for (int i = 0; i < nickel.count; i++) cout << "Change: nickel" << endl;
-    nickel.count = 0;
-    cout << "Sorry! Machine is short of " << nickelDeficiency << " nickels." << endl;
-  } else {
-    balance -= (0.05 * nickelsNeeded);
-    for (int i = 0; i < nickelsNeeded; i++) cout << "Change: nickel" << endl;
-  }
-
-  */
+char to_lowercase(char c) {
+	if (c >= 'A' && c <= 'Z')
+		return c + 32;
+	return c;
+}
