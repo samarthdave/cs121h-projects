@@ -8,21 +8,15 @@
 #define QUARTER 0.25
 #define DIME 0.10
 #define NICKEL 0.05
+// defined penny just in case I ever want to continue
 #define PENNY 0.01
 
 using namespace std;
 
-struct CoinChange {
-  int quarterCount;
-  int dimeCount;
-  int nickelCount;
-  int pennyCount;
-};
-
 struct VendingItem {
   string itemName;
   int count;
-  float cost;
+  double cost;
   string toString() {
     return itemName + " costs " + to_string(cost);
   }
@@ -33,19 +27,35 @@ bool isCoin(string &selection);
 bool isAction(string &selection);
 void drawDivider();
 void printChoices(vector<VendingItem> &vendingItems);
-void dispenseChange(float &balance, vector<VendingItem> &vendingItems);
-void buyItem(string &item, float &balance, vector<VendingItem> &vendingItems);
+void dispenseChange(double &balance, vector<VendingItem> &vendingItems);
+void buyItem(string &item, double &balance, vector<VendingItem> &vendingItems);
 
-int main() {
+int main(int argc, char* argv[]) {
+  // NOTE: the "enter input" code handles each word in a sentence
+  // independently and as a separate command. That's atleast how
+  // cin handled it so I just went with it...
+
+  // check if filename was given, else exit the program
+  if (argc != 2) {
+    cout << "Enter the filename of vending items as an argument." << endl;
+    cout << "Eg. \"./vending vending1.txt\"" << endl;
+    return 0;
+  }
+
   // vector of machine items
   vector<VendingItem> vendingItems;
   // read in file
-  string fileName = "vending1.txt";
+  string fileName = argv[1]; // "vending1.txt"
   ifstream infile(fileName);
+
+  if (!infile.is_open()) {
+    cout << "ERROR: Could not load you file with name: \"" << fileName << "\"" << endl;
+    return 0;
+  }
 
   string itemName;
   int count;
-  float cost;
+  double cost;
 
   while (infile >> itemName >> count >> cost) {
     VendingItem textInput = { itemName, count, cost };
@@ -57,20 +67,19 @@ int main() {
   printChoices(vendingItems);
   
   // start off with 0 in the machine
-  float balance = 1.00;
+  double balance = 1.00;
 
   // choices: "press", "quit", "change", or coins
   string selection = "";
   string prevSelection = "";
   
   while (true) {
-    cout << "Options: [press|change|contents|quit|quarter|nickel|dime|penny]" << endl;
+    cout << "Options: [press|change|contents|quit|quarter|nickel|dime]" << endl;
     if (prevSelection != "") {
       cout << "(Previous choice: " << prevSelection << ")" << endl;
     }
 
     printf("Enter input (balance: %.2f): ", balance);
-    // cout << "Enter input (balance: " << balance << "): ";
     cin >> selection;
     cout << "\nYou entered: '" << selection << "'" << endl;
     // lowercase string input
@@ -90,14 +99,15 @@ int main() {
       }
       if (selection == "change") {
         // dispense the balance of coins
-        drawDivider();
+        cout << "Dispensing change..." << endl;
         dispenseChange(balance, vendingItems);
       }
     }
     // if it is a coin, add its constant value
     else if (isCoinBool) {
       if (prevSelection == "press") {
-        cout << "You cannot dispense a coin." << endl;
+        drawDivider();
+        cout << "Error: You cannot dispense a coin." << endl;
         prevSelection = selection;
         continue;
       }
@@ -107,8 +117,13 @@ int main() {
         balance += DIME;
       } else if (selection == "nickel") {
         balance += NICKEL;
-      } else if (selection == "penny") {
-        balance += PENNY;
+      }
+
+      // add coin to inventory
+      for (int i = 0; i < vendingItems.size(); i++) {
+        if (vendingItems.at(i).itemName == selection) {
+          vendingItems.at(i).count += 1;
+        }
       }
 
       printf("Your balance is %.2f.\n", balance);
@@ -140,12 +155,109 @@ int main() {
   cout << "Thanks for using the vending machine!" << endl;
 }
 
-void dispenseChange(float &balance, vector<VendingItem> &vendingItems) {
+// ideally, this function will also be called by the "buyItem" function
+void dispenseChange(double &balance, vector<VendingItem> &vendingItems) {
+  drawDivider(); // more convenient than I imagined
+
+  // load coin values from vector
+  int quarterIndex = -1;
+  int dimeIndex = -1;
+  int nickelIndex = -1;
+  for (int i = 0; i < vendingItems.size(); i++) {
+    VendingItem &temp = vendingItems.at(i);
+    if (temp.itemName == "quarter") {
+      quarterIndex = i;
+    }
+    if (temp.itemName == "dime") {
+      dimeIndex = i;
+    }
+    if (temp.itemName == "nickel") {
+      nickelIndex = i;
+    }
+  }
+
+  // use indices to get references from vector array
+  VendingItem &quarter = vendingItems.at(quarterIndex);
+  VendingItem &dime = vendingItems.at(dimeIndex);
+  VendingItem &nickel = vendingItems.at(nickelIndex);
+
+  // cout << quarter.count << " " << dime.count  << " " << nickel.count << endl;
+
   // check what combinations of coins that you get back (dimes, nickels, etc)
+  int quartersNeeded = 0;
+  int dimesNeeded = 0;
+  int nickelsNeeded = 0;
+
+  double balanceCopy = balance;
+  cout << balanceCopy << endl;
+  // get smallest value of coins that we can get
+  quartersNeeded = balanceCopy / 0.25;
+  balanceCopy -= (quartersNeeded * 0.25);
+
+  dimesNeeded = balanceCopy / 0.1;
+  balanceCopy -= (dimesNeeded * 0.1);
+
+  nickelsNeeded = balanceCopy / 0.05;
+  balanceCopy -= (nickelsNeeded * 0.05);
+
+  // now increment dimes, etc if not enough quarters
+  
+  int addDimes = 0;
+  int addNickels = 0;
+  if (quartersNeeded > quarter.count) {
+    // get deficient count of quarters
+    int quarterDeficiency = quartersNeeded - quarter.count;
+    balance = balance - (0.25 * quarter.count);
+    for (int i = 0; i < quarter.count; i++) cout << "Change: quarter" << endl;
+    quarter.count = 0;
+    
+    // convert a quarter to dimes and nickels
+    addNickels = (int)((0.25 * quarterDeficiency) / 0.05);
+    addDimes = (int)(addNickels / 2);
+    addNickels = (int)(addNickels % 2);
+  } else {
+    balance -= (0.25 * quartersNeeded);
+    for (int i = 0; i < quartersNeeded; i++) cout << "Change: quarter" << endl;
+  }
+  
+  dimesNeeded += addDimes;
+  nickelsNeeded += addNickels;
+  addDimes = 0;
+  addNickels = 0;
+
+  // step 2: dimes
+  if (dimesNeeded > dime.count) {
+    // get deficient count of dimes
+    int dimeDeficiency = dimesNeeded - dime.count;
+    balance = balance - (0.1 * dime.count);
+    for (int i = 0; i < dime.count; i++) cout << "Change: dime" << endl;
+    dime.count = 0;
+
+    // convert dimes to nickels
+    addNickels = (int)((0.1 * dimeDeficiency) / 0.05);
+  } else {
+    balance -= (0.1 * dimesNeeded);
+    for (int i = 0; i < dimesNeeded; i++) cout << "Change: dime" << endl;
+  }
+  nickelsNeeded += addNickels;
+
+  // now time for the nickels (no luck)
+  // but this should rarely happen where the machine has increments of 0.01
+  // or oddly priced items??
+  if (nickelsNeeded > nickel.count) {
+    int nickelDeficiency = nickelsNeeded - nickel.count;
+    balance = balance - (0.05 * nickel.count);
+    for (int i = 0; i < nickel.count; i++) cout << "Change: nickel" << endl;
+    nickel.count = 0;
+    cout << "Sorry! Machine is short of " << nickelDeficiency << " nickels." << endl;
+  } else {
+    balance -= (0.05 * nickelsNeeded);
+    for (int i = 0; i < nickelsNeeded; i++) cout << "Change: nickel" << endl;
+  }
 
 }
 
-void buyItem(string &item, float &balance, vector<VendingItem> &vendingItems) {
+void buyItem(string &item, double &balance, vector<VendingItem> &vendingItems) {
   // check there is more than one item remaining in list...
   for (int i = 0; i < vendingItems.size(); i++) {
     VendingItem &v = vendingItems.at(i);
@@ -172,7 +284,8 @@ void buyItem(string &item, float &balance, vector<VendingItem> &vendingItems) {
       return;
     }
   }
-  cout << "We couldn't find the item in the machine. Did you check the status?" << endl;
+  drawDivider();
+  cout << "We couldn't find the item in the machine. Did you check the contents?" << endl;
   printChoices(vendingItems);
 }
 
@@ -211,7 +324,7 @@ bool isAction(string &selection) {
 // eg. "press quarter" is invalid
 bool isCoin(string &selection) {
   return (selection == "quarter" || selection == "dime" ||
-          selection == "nickel" || selection == "penny");
+          selection == "nickel");
 }
 
 void drawDivider() {
