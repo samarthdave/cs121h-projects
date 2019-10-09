@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// signature (or prototype)
 void subsetsRecursive(vector<string> &arr_str, vector<string> &results, string prepend="", int i=0);
 
 int main(int argc, char* argv[]) {
@@ -54,32 +55,3 @@ void subsetsRecursive(vector<string> &arr_str, vector<string> &results, string p
   }
   subsetsRecursive(arr_str, results, prepend, i + 1);
 }
-
-// void subsetsRecursive(vector<string> &results, vector<string> &str_values, string prepend, int i) {
-//   int str_size = str_values.size();
-
-//   // if at last item in vector
-//   if (i == str_size) {
-//     // results.push_back(prepend);
-//     return;
-//   }
-
-//   // concat. string with value at i
-//   subsetsRecursive(results, str_values, prepend + str_values.at(i), i+1);
-//   subsetsRecursive(results, str_values, prepend, i+1);
-// }
-
-// void subsetsRecursive(vector<string> &results, vector<string> &str_values, string prepend, int i) {
-//   int str_size = str_values.size();
-
-//   // if at last item in vector
-//   if (i == str_size) {
-//     // results.push_back(prepend);
-//     cout << prepend << endl;
-//     return;
-//   }
-
-//   // concat. string with value at i
-//   subsetsRecursive(results, str_values, prepend + str_values.at(i), i+1);
-//   subsetsRecursive(results, str_values, prepend, i+1);
-// }

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// signature (or prototype)
 void subsetsIterative(vector<string> &, vector<vector<string>> &);
 
 int main(int argc, char* argv[]) {
@@ -23,7 +24,6 @@ int main(int argc, char* argv[]) {
   cout << "Expected length (excluding empty vector): " << expectedSize << endl;
 
   vector<vector<string>> combinations;
-
   // the meat
   subsetsIterative(cli_args, combinations);
 
@@ -40,18 +40,19 @@ int main(int argc, char* argv[]) {
 
 }
 
+// default args are not placed here (only in prototype)
 void subsetsIterative(vector<string> &cli_args, vector<vector<string>> &combinations) {
   for (int i = 0; i < cli_args.size(); i++) {
-    string item = cli_args[i];
+    string v_at_cli = cli_args[i];
 
     int staticSetSize = combinations.size();
     for (int g = 0; g < staticSetSize; g++) {
       // make a copy of the set
       vector<string> tempSet = combinations[g];
-      tempSet.push_back(item);
+      tempSet.push_back(v_at_cli);
       combinations.push_back(tempSet);
     }
-    vector<string> temp = { item };
+    vector<string> temp = { v_at_cli };
     combinations.push_back(temp);
   }
   

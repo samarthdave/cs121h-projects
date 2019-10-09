@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// signatures (or prototypes)
 double f_prime(double);
 double quadraticValueAt(double, double);
 double get_intersection(double, double);
