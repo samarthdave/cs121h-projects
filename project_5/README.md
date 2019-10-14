@@ -1,3 +1,15 @@
+# Project 5 Important Information
+Please use the tb.fasta and tb.prot_table file
+or use your own. I only tested on those 2 files but fingers crossed...
+
+Also, I hesitate to commit files that big but I might need them for future reference.
+
+#### How to run
+1. make
+2. ./genomics (with 1 2 or 3 inputs)
+- ex: ./genomics text.fasta text2.prot_table text3
+
+
 ---------------------
 CSCE 121H - Fall 2019
 Project 5 - Genomics
