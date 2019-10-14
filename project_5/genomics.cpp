@@ -4,6 +4,10 @@
 #include <vector> // duh...
 #include <cstdio> // printf
 #include <string> // getline, stoi
+#include <cstdlib> // exit function
+#include <cmath> // pow, floor
+
+#include "codons.hpp"
 
 using namespace std;
 
@@ -16,14 +20,25 @@ struct Gene {
   // f & g (don't care)
   string geneName;
   string orfID;
+  int geneLength;
+};
+
+struct Info {
+  char homopolymerRepeatLetter;
+  char homopolymerRepeatCount;
+  int homopolymerLongestLoc;
 };
 
 // prototype (defining signature)
-inline bool stringEndsWith(string &value, string &ending);
-void readGenomeFromFile(string&, string&);
-vector<Gene> readProtTable(string&);
+bool stringEndsWith(string &value, string &ending);
+Info readGenomeFromFile(string&, string&);
+vector<Gene> readProtTable(string&, Info&);
 vector<string> splitByDelimiter(string&, char);
 string lowercaseString(string a);
+double calculateSD(vector<Gene> &, double &);
+
+// Please forgive my bad design; I just wanted to keep return type at void
+int globalLongestHomopolymerLoc;
 
 int main(int argc, char *argv[]) {
   switch (argc) {
@@ -40,16 +55,17 @@ int main(int argc, char *argv[]) {
   string genomeFilename = argv[1];
   // save genome file output
   string allBasePairs;
-  readGenomeFromFile(genomeFilename, allBasePairs);
+  Info return_1 = readGenomeFromFile(genomeFilename, allBasePairs);
   // read in protein table (if prot table passed)
   if (argc >= 3) {
     string protTableFilename = argv[2];
-    readProtTable(protTableFilename);
+    readProtTable(protTableFilename, return_1);
   }
 }
 
 // READ in file (filename) and push to allBasePairs
-void readGenomeFromFile(string &filename, string &allBasePairs) {
+Info readGenomeFromFile(string &filename, string &allBasePairs) {
+  Info returnMe;
   string FASTA_EXTENSION = ".fasta";
   // read file from filename and create stream
   ifstream fileStream;
@@ -59,18 +75,18 @@ void readGenomeFromFile(string &filename, string &allBasePairs) {
   if (!fileStream.is_open()) {
     cerr << "Could not open file: " << filename << endl;
     exit(1);
-    return;
+    return returnMe;
   }
   // check file type
   if (!stringEndsWith(filename, FASTA_EXTENSION)) {
     printf("Error: file extension is invalid. Expected %s. Got %s.", FASTA_EXTENSION.c_str(), filename.c_str());
     exit(1);
-    return;
+    return returnMe;
   }
 
   int lineCount = 0;
-  int allBasePairCount = 0;
   int guanine_and_cytosine = 0;
+  int allBasePairCount = 0;
   // first line
   string headerLine = "";
   int lineLength = 0;
@@ -136,14 +152,21 @@ void readGenomeFromFile(string &filename, string &allBasePairs) {
   printf("Longest homopolymer: '%c' of length %d @ coord %d\n", letter, maxCount, maxEndLocation);
   cout << "------------------------------------------" << endl;
 
+  globalLongestHomopolymerLoc = maxEndLocation;
+
   // close file stream
   fileStream.close();
+  // for easier return value
+  returnMe.homopolymerRepeatLetter = letter;
+  returnMe.homopolymerRepeatCount = maxCount;
+  returnMe.homopolymerLongestLoc = maxEndLocation;
+  return returnMe;
 }
 
 // vector<string> readProtTable(...)
 // input file and push info into a vector of structs
 // filename --> read me and return a vector with the important values
-vector<Gene> readProtTable(string &filename) {
+vector<Gene> readProtTable(string &filename, Info &return_1) {
   vector<Gene> all_genes;
   string PROT_TABLE_EXTENSION = ".prot_table";
   // read file from filename and create stream
@@ -164,10 +187,23 @@ vector<Gene> readProtTable(string &filename) {
   }
 
   // stats preparation
+  vector<int> geneLengths;
+  string homoPolymerLocation = "none";
+  // Gene count, min max
   int GENES_COUNT = 0;
   int GENES_LENGTH_TOTAL = 0; // for average
+  int LAST_COORD_VALUE = 0;
   int GENES_MIN_SIZE; // largest size
   int GENES_MAX_SIZE; // smallest size
+  // integenic region:
+  int MAX_INTERGENIC = 0;
+  string intergenicMaxLocation = "";
+  // -------------------
+  int MIN_INTERGENIC = 0;
+  string intergenicMinLocation = "";
+  // -------------------
+  int TOTAL_INTERGENIC = 0;
+  int INTERGENIC_COUNT = 0;
   // read in file
   string line;
   while (getline(fileStream, line)) {
@@ -185,14 +221,40 @@ vector<Gene> readProtTable(string &filename) {
       strand,        // strand - char, duh
       stoi(temp[4]), // "proteinProductSize" - protein product size 
       temp[7],       // geneName
-      temp[8]        // orfID (ex. "Rv2401" or "SACOL2049")
+      temp[8],       // orfID (ex. "Rv2401" or "SACOL2049")
+      geneLength     // difference value between s2 and s1 plus 1
     };
     
-    // stats stuff
+    // ------------- stats stuff -----------
+    // if first run
     if (GENES_COUNT == 0) {
       GENES_MIN_SIZE = geneLength;
       GENES_MAX_SIZE = geneLength;
+    } else {
+      Gene prevGene = all_genes[GENES_COUNT - 1];
+      // is homopolymer between?
+      if (prevGene.endCoord < return_1.homopolymerLongestLoc && return_1.homopolymerLongestLoc < t.startCoord) {
+        homoPolymerLocation = prevGene.orfID;
+      }
+
+      // integenic region
+      int intergenicDiff = s1 - prevGene.endCoord;
+      // compare values now to min and max
+      if (intergenicDiff > MAX_INTERGENIC) {
+        MAX_INTERGENIC = intergenicDiff + 1; // account for last bp
+        intergenicMaxLocation = prevGene.orfID;
+      }
+      if (intergenicDiff < MIN_INTERGENIC) {
+        MIN_INTERGENIC = intergenicDiff + 1; // account for last bp
+        intergenicMinLocation = prevGene.orfID;
+      }
+      TOTAL_INTERGENIC += intergenicDiff;
+      INTERGENIC_COUNT += 1;
     }
+    // last coord
+    if (s2 > LAST_COORD_VALUE) { LAST_COORD_VALUE = s2; }
+    
+    // count up by one run
     GENES_COUNT += 1;
     GENES_LENGTH_TOTAL += geneLength;
     
@@ -202,14 +264,26 @@ vector<Gene> readProtTable(string &filename) {
 
   // [ ] print out statistics about genes
   int GENES_SIZE = all_genes.size();
-  for (int i = 0; i < GENES_SIZE; i++) {
 
-  }
+  // calculating stats:
+  // double meanGeneLength
+  double meanGeneSize = GENES_LENGTH_TOTAL / (double)GENES_COUNT;
+  // standard dev.
+  double standardDev = calculateSD(all_genes, meanGeneSize);
+  // coding fraction / percentage
+  double codingFraction = GENES_LENGTH_TOTAL / (double) LAST_COORD_VALUE * 100;
+  // intergenic region
+  double intergenicAvg = floor(TOTAL_INTERGENIC / (double)INTERGENIC_COUNT);
 
-  cout << "------------------------------------------" << endl;
+  // ------------------------------------------------------------
   cout << "[PROT TABLE]: num genes - " << GENES_SIZE << endl;
   cout << "------------------------------------------" << endl;
-  cout << "mean " << endl;
+  cout << "mean " << meanGeneSize << " | Coding Fraction: " << codingFraction << "%" << endl;
+  cout << "gene sizes: [" << GENES_MIN_SIZE << "," << GENES_MAX_SIZE << "], mean=" << meanGeneSize << " bp, stdev=" << standardDev << endl;
+  cout << "intergenic mean size: " << intergenicAvg << endl;
+  cout << "largest intergenic region: " << MAX_INTERGENIC << " (after " << intergenicMaxLocation << ")" << endl;
+  cout << "smallest intergenic region: " << MIN_INTERGENIC << " (after " << intergenicMinLocation << ")" << endl;
+  cout << "Longest homopolymer @ coord " << return_1.homopolymerLongestLoc << ") after: " << homoPolymerLocation << endl;
 
   // close file stream
   fileStream.close();
@@ -220,7 +294,7 @@ vector<Gene> readProtTable(string &filename) {
 // string ends with substring?
 // arg1 --> big string
 // arg2 --> smaller substring
-inline bool stringEndsWith(string &arg1, string &arg2) {
+bool stringEndsWith(string &arg1, string &arg2) {
   string value = lowercaseString(arg1);
   string ending = lowercaseString(arg2);
   
@@ -250,4 +324,12 @@ vector<string> splitByDelimiter(string &line, char c) {
     lines.push_back(token);
   }
   return lines;
+}
+
+double calculateSD(vector<Gene> &values, double &mean) {
+  int valuesSize = values.size();
+  double standardDeviation = 0.0;
+  for(int i = 0; i < valuesSize; i++)
+    standardDeviation += pow(values[i].geneLength - mean, 2);
+  return sqrt(standardDeviation / valuesSize);
 }
