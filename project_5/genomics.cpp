@@ -283,6 +283,13 @@ vector<Gene> readProtTable(string &filename, Info &return_1) {
       }
       TOTAL_INTERGENIC += intergenicDiff;
       INTERGENIC_COUNT += 1;
+
+      if (geneLength > GENES_MAX_SIZE) {
+        GENES_MAX_SIZE = geneLength;
+      }
+      if (geneLength < GENES_MIN_SIZE) {
+        GENES_MIN_SIZE = geneLength;
+      }
     }
     // last coord
     if (s2 > LAST_COORD_VALUE) { LAST_COORD_VALUE = s2; }
@@ -330,8 +337,6 @@ string print_seq(Gene &t, string &basePairs) {
     return "";
   }
 
-  // int diff = t.endCoord - t.startCoord;
-  
   string oldSubstr = basePairs.substr(t.startCoord - 4, t.endCoord - t.startCoord + 4);
   string mainSubstr = oldSubstr;
   // remove the first 3 letters (start)
