@@ -6,6 +6,7 @@
 #include <string> // getline, stoi
 #include <cstdlib> // exit function
 #include <cmath> // pow, floor
+#include <algorithm> // reverse (for reversing a string)
 
 #include "codons.hpp"
 
@@ -36,20 +37,16 @@ vector<Gene> readProtTable(string&, Info&);
 vector<string> splitByDelimiter(string&, char);
 string lowercaseString(string a);
 double calculateSD(vector<Gene> &, double &);
-
-// Please forgive my bad design; I just wanted to keep return type at void
-int globalLongestHomopolymerLoc;
+string print_seq(Gene&, string &);
+void printOutAminoAcidSequence(string &);
 
 int main(int argc, char *argv[]) {
-  switch (argc) {
-    case 0: // don't break this, will hit case 1
-    case 1:
+  if (argc == 0 || argc == 1) {
       printf("Error: No value entered as argument; Need filename.\n");
       printf("Enter the FASTA file as a command line argument.\n");
       exit(1);
-    case 2:
-      printf("Enter prot table file (optional) as second argument.\n");
-      break;
+  } else if (argc == 2) {
+    printf("Enter prot table file (optional) as second argument.\n");
   }
 
   string genomeFilename = argv[1];
@@ -57,12 +54,32 @@ int main(int argc, char *argv[]) {
   string allBasePairs;
   Info return_1 = readGenomeFromFile(genomeFilename, allBasePairs);
   // read in protein table (if prot table passed)
+  
   if (argc >= 3) {
     string protTableFilename = argv[2];
-    readProtTable(protTableFilename, return_1);
+    vector<Gene> allGenes = readProtTable(protTableFilename, return_1);
+
+    // if looking for a gene!
+    string nameOrID = "";
+    if (argc == 4) { // read the name or id
+      nameOrID = argv[3];
+      cout << "--------------------------------------" << endl;
+      cout << "Finding gene with id " << nameOrID << endl;
+      
+      // loop thru array of genes
+      // if you find it, print seq of the start and end
+      for (int i = 0; i < allGenes.size(); i++) {
+        if (allGenes[i].orfID == nameOrID) {
+          Gene temp = allGenes[i];
+          string subStrValue = print_seq(temp, allBasePairs);
+          printOutAminoAcidSequence(subStrValue);
+        }
+      }
+    }
   }
 }
 
+// Info (a struct with data that ensures I don't have to use global variables or something...)
 // READ in file (filename) and push to allBasePairs
 Info readGenomeFromFile(string &filename, string &allBasePairs) {
   Info returnMe;
@@ -152,8 +169,6 @@ Info readGenomeFromFile(string &filename, string &allBasePairs) {
   printf("Longest homopolymer: '%c' of length %d @ coord %d\n", letter, maxCount, maxEndLocation);
   cout << "------------------------------------------" << endl;
 
-  globalLongestHomopolymerLoc = maxEndLocation;
-
   // close file stream
   fileStream.close();
   // for easier return value
@@ -161,6 +176,24 @@ Info readGenomeFromFile(string &filename, string &allBasePairs) {
   returnMe.homopolymerRepeatCount = maxCount;
   returnMe.homopolymerLongestLoc = maxEndLocation;
   return returnMe;
+}
+
+// convert 3 letter codons to amino acid
+void printOutAminoAcidSequence(string &subStrValue) {
+  cout << endl;
+  cout << "------------------------------" << endl;
+  cout << "Printing translated set" << endl;
+  int substrLength = subStrValue.length();
+
+  int c = 1;
+  printf("%8d ", c);
+  for (int f = 0; f < substrLength; f += 3) {
+    string s = subStrValue.substr(f, 3);
+    cout << aa(s);
+    if (c % 70 == 0) { printf("\n%8d ", c + 1); }
+    c += 1;
+  }
+
 }
 
 // vector<string> readProtTable(...)
@@ -278,7 +311,7 @@ vector<Gene> readProtTable(string &filename, Info &return_1) {
   // ------------------------------------------------------------
   cout << "[PROT TABLE]: num genes - " << GENES_SIZE << endl;
   cout << "------------------------------------------" << endl;
-  cout << "mean " << meanGeneSize << " | Coding Fraction: " << codingFraction << "%" << endl;
+  cout << "Coding Fraction: " << codingFraction << "%" << endl;
   cout << "gene sizes: [" << GENES_MIN_SIZE << "," << GENES_MAX_SIZE << "], mean=" << meanGeneSize << " bp, stdev=" << standardDev << endl;
   cout << "intergenic mean size: " << intergenicAvg << endl;
   cout << "largest intergenic region: " << MAX_INTERGENIC << " (after " << intergenicMaxLocation << ")" << endl;
@@ -288,6 +321,52 @@ vector<Gene> readProtTable(string &filename, Info &return_1) {
   // close file stream
   fileStream.close();
   return all_genes;
+}
+
+string print_seq(Gene &t, string &basePairs) {
+  if (t.endCoord < t.startCoord) {
+    cout << "ERROR: End is less than start. Cannot substring that." << endl;
+    exit(1);
+    return "";
+  }
+
+  // int diff = t.endCoord - t.startCoord;
+  
+  string oldSubstr = basePairs.substr(t.startCoord - 4, t.endCoord - t.startCoord + 4);
+  string mainSubstr = oldSubstr;
+  // remove the first 3 letters (start)
+  mainSubstr.erase(0, 3);
+
+  if (t.strand == '-') {
+    // get reverse complement
+    // flip the mainSubstr and convert a, t, c, g
+    reverse(mainSubstr.begin(), mainSubstr.end());
+    for (int i = 0; i < mainSubstr.length(); i++) {
+      switch(mainSubstr[i]) {
+        case 'T': mainSubstr[i] = 'A'; break;
+        case 'A': mainSubstr[i] = 'T'; break;
+        case 'G': mainSubstr[i] = 'C'; break;
+        case 'C': mainSubstr[i] = 'G'; break;
+      }
+    }
+  }
+  
+  // print 70 letters on a row
+  int BP_length = mainSubstr.length();
+  int start = t.startCoord;
+  int end = t.endCoord + 1;
+
+  cout << "Printing sequence from " << start << " to " << end << " (length = " << BP_length << ")" << endl;
+  cout << "------------------------------------------" << endl;
+
+  int c = 1;
+  printf("%8d ", c);
+  for (int f = 0; f < mainSubstr.length(); f++) {
+    cout << mainSubstr.at(f);
+    if (c % 70 == 0) { printf("\n%8d ", c + 1); }
+    c += 1;
+  }
+  return mainSubstr;
 }
 
 // bool stringEndsWith(...)
