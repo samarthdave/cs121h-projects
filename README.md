@@ -6,6 +6,12 @@ My projects/submissions for CSCE 121 H
 
 ## Projects overview (ordered most recent to least)
 
+#### [Project 5: Genomics](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project5.txt)
+Analyze DNA from *.fasta file, protein table, amino acid sequences
+
+#### [Project 4: Newton-Raphson, Subsets](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project4.txt)
+...calculate the square root of a float given on the comand line...
+
 #### [Project 3: Vending Machine](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project3.txt)
 - Build a vending machine
 - interactive program with user input
