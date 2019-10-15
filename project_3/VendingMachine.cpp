@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
     for (char &c: selection) {
       c = to_lowercase(c);
     }
-    
+
 
     // if it is NOT an action and NOT a coin, then it must be a food item
     bool isCoinBool = isCoin(selection);
