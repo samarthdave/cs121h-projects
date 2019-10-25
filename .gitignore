@@ -7,3 +7,11 @@
 # also except makefiles
 !makefile
 !Makefile
+
+# also object files that are compiled with make files
+*.o
+
+# should probably have included the prot & fasta files from the start
+*.fasta
+# they tend to be in 5-10 MB range...
+*.prot_table

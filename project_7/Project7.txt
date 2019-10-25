@@ -1,0 +1,159 @@
+---------------------
+CSCE 121H - Fall 2019
+Project 7 - Polynomials
+due: Fri Nov 1, 8:00am
+---------------------
+
+The objective of this assignment is to write a C++ program for
+manipulating polynomials, including reading (parsing from strings),
+writing, doing sum and products, evaluation, taking derivatives, and
+calculating roots.  This will be done by writing a class for
+polynomials (Poly).
+
+Polynomials are expressions like "-2x^3+8x^2+x-3".  We will assume
+these are single-variable polynomials always using "x".  Though we
+will typically use ints for the coefficients, for generality, you
+should treat them as floats.  The exponents are positive integers.
+When we express polynomials as strings, we typically write the terms
+in decreasing order, skipping terms with coefficients of 0.
+
+You can think of the syntax of polynomials as a sequence of "terms"
+separated by either a '+' or '-'.  Alternatively, you can think of
+terms as a sequence of signed terms. (If the initial term lacks a
+sign, you can add an implicit '+'.)  The format of each term is
+<sign><float>x^<int>, where <float> is the coefficient and <int> is
+the exponent (always positive).  The exceptions are: a) constants are
+terms lacking an "x^<int>", b) first-order terms have an "x" but lack
+"^<int>", and c) the coeffient is optional if it is 1.  Here is the
+grammar:
+
+  <poly> ::= <poly> <signedterm> | <signedterm> | <term>
+  <signedterm> ::= +|- <term>
+  <term> ::= [<float>]x[^<int>]
+
+(note: there are no spaces in polynomial expressions.)
+
+Write your program in an interactive way, with a prompt, so that users
+can type in expressions and commands.  Here are the commands:
+
+  quit - exits the program
+  <poly> - read it in; print it out
+  SUM <poly> <poly> - prints out the sum of 2 polynomials
+  PROD <poly> <poly> - prints out the product of 2 polynomials
+  DERIV <poly> - creates the derivative a polynomial and prints it out
+  ROOT <poly> - use NewtonRaphson iteration to find a root and print it out
+
+For reading in polynomials, you will have to implement a constructor that
+parses strings according to the format described above, and uses it to
+populate your internal representation.  Printing out a polynomial
+based on the internal representation should also follow the
+conventional format as described above.
+
+Roots: An order-N polynomial has at most N root.  However, it might
+have less than N roots.  One reason is that roots might be repeated
+(for example: the only root of 9x^2-36x+36 = (3x-6)^2 is 2).  Another
+reason is that some roots of polynomials might not be real
+(i.e. complex), for example the root of x^2+4=0 is 2i.  I am not
+concerned about enumerating all roots, nor will I give test cases
+where there are no real roots.  I am just looking for "a root" using
+Newton-Raphson iteration (staring from an arbitrary point).
+
+Importantly, to implement N-R iteration, you will need to be able to
+do two things.  First you will need to be able evaluate an arbitrary
+polynomial at an arbitrary point, i.e. calculate P(x) for some x (with
+"float eval(float)" as a method).  Second, you will need to be able to
+take the algebraic derivative of a polynomial, which just creates
+another polynomial object.  The rules of differentiation are easy for
+polynomials.
+
+Here is an example transcript of the program running:
+
+compute.cs.tamu.edu> poly
+> x+1
+x+1
+
+> x^2-4
+x^2-4
+
+> sum x+1 x^2-4
+SUM
+P   = x+1
+Q   = x^2-4
+P+Q = x^2+x-3
+
+> sum 6x^2-x-1 -6x^2+8x+1
+SUM
+P   = 6x^2+x-1
+Q   = -6x^2+8x+1
+P+Q = 9x
+
+> prod x+1 x^2-1
+PROD
+P   = x+1
+Q   = x^2-1
+P*Q = x^3+x^2-x-1
+
+> deriv 2x^3+10x^2-4x-4
+DERIV
+P     = 2x^3+10x^2-4x-4
+dP/dx = 6x^2+20x-4
+
+> root x^3+x^2-4x-4
+ROOT
+P = x^3+x^2-4x-4
+root(P)=r=2, P(r)=0
+
+> root 3x^2+12x+2
+ROOT
+P = 3x^2+12x+2
+root(P)=r=-0.174258, P(r)=-1.16148e-08
+
+> prod 3x+2 3x+2
+PROD
+P   = 3x+2
+Q   = 3x+2
+P*Q = 9x^2+12x+4
+
+> root 9x^2+12x+4
+ROOT
+P = 9x^2+12x+4
+root(P)=r=-0.666667, P(r)=1.42109e-14
+
+> prod x^3+x^2-4x-4 9x^2+12x+4
+PROD
+P   = x^3+x^2-4x-4
+Q   = 9x^2+12x+4
+P*Q = 9x^5+21x^4-20x^3-80x^2-64x-16
+
+> deriv 3x^5+15x^4+2x^3-58x^2-56x-8
+P     = 3x^5+15x^4+2x^3-58x^2-56x-8
+dP/dx = 15x^4+60x^3+6x^2-116x-56
+
+> quit
+
+(For simplicity, you can put these commands in a file
+and "redirect" them into your program, which will
+insert them into you console input stream (cin) as
+if a user had typed them in.)
+
+test.poly
+---------
+x+1
+x^2-4
+sum x+1 x^2-4
+sum 6x^2-x-1 -6x^2+8x+1
+prod x+1 x^2-1
+deriv 2x^3+10x^2-4x-4
+root x^3+x^2-4x-4
+root 3x^2+12x+2
+prod 3x+2 3x+2
+root 9x^2+12x+4
+prod x^3+x^2-4x-4 9x^2+12x+4
+deriv 3x^5+15x^4+2x^3-58x^2-56x-8
+quit
+---------
+
+compute.cs.tamu.edu> poly < test.poly
+(...generates all the output above...)
+
+(Don't worry if the command prompts get in the way.)
