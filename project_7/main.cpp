@@ -15,16 +15,14 @@ int main() {
 
   string userInput = "";
 
-  cout << "> ";
-  while (getline(cin, userInput)) {
-    // lowercase the user input
+  do {
+    cout << "> "; // to indicate user input
+    // get user input & save to string
+    getline(cin, userInput);
+    // duh...
     lowercaseString(userInput);
-
-    bool quit = handleCommand(userInput);
-
-    if (quit) break; // if the return from the function is true
-    cout << "> ";
-  }
+    // while the function doesn't return true
+  } while(!handleCommand(userInput));
 
   return 0;
 }
