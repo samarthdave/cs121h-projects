@@ -1,7 +1,1 @@
-x+1
-x^2-4
-sum x+1 x^2-4
-sum 6x^2-x-1 -6x^2+8x+1
-prod x+1 x^2-1
-deriv 2x^3+10x^2-4x-4
-root x^3+x^2-4x-4
+SUM x+1 x^2-4
