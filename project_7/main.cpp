@@ -4,6 +4,7 @@
 using namespace std;
 
 bool handleCommand(string &);
+bool isInvalidInput(string &);
 void lowercaseString(string &);
 bool stringStartsWith(string &, string);
 
@@ -21,6 +22,11 @@ int main() {
     getline(cin, userInput);
     // duh...
     lowercaseString(userInput);
+    // check for invalid input (size checker)
+    if (isInvalidInput(userInput)) {
+      cout << "Invalid input." << endl;
+      break;
+    }
     // while the function doesn't return true
   } while(!handleCommand(userInput));
 
@@ -40,43 +46,57 @@ bool handleCommand(string &cmd) {
 
   // SUM (add 2 polynomials)
   if (command == "sum") {
-    
     cout << "----- SUM -----" << endl;
     if (numArguments != 3) {
-      cout << "Invalid input. Enter 3 inputs." << endl;
+      cout << "Invalid input. Enter 2 polynomials." << endl;
+      return false; // start over
+    }
+    // get next 2 items in components
+    Polynomial a = Polynomial(components[1]);
+    Polynomial b = Polynomial(components[2]);
+    
+    // print out
+    cout << "A: " << a.toString() << endl;
+    cout << "B: " << b.toString() << endl;
+
+    cout << "A+B: " << (a+b).toString() << endl;
+
+  }  
+  // PRODUCT (multiply out polynomials)
+  else if (command == "prod") {
+    cout << "--- PRODUCT ---" << endl;
+    // check for invalid # of arguments
+    if (numArguments != 3) {
+      cout << "Invalid input. Enter 2 polynomials." << endl;
       return false;
     }
     // get next 2 items in components
     Polynomial a = Polynomial(components[1]);
     Polynomial b = Polynomial(components[2]);
-    // make a & b polynomials based off it
-    // if its not 2 then error
-    
-  } // PRODUCT (multiply out polynomials)
-  else if (command == "prod") {
-    cout << "--- PRODUCT ---" << endl;
-    // check for invalid # of arguments
-    if (numArguments != 3) {
-      cout << "Invalid input. Enter 3 inputs." << endl;
-      return false;
-    }
 
-  } // DERIVATIVE of polynomial
+    // print out
+    cout << "A: " << a.toString() << endl;
+    cout << "B: " << b.toString() << endl;
+
+    cout << "A*B: " << (a*b).toString() << endl;
+  }
+  // DERIVATIVE of polynomial
   else if (command == "deriv") {
     cout << "-  DERIVATIVE -" << endl;
     // check for invalid # of arguments
     if (numArguments != 2) {
-      cout << "Invalid input. Enter 2 inputs." << endl;
+      cout << "Invalid input. Enter 2 values." << endl;
       return false;
     }
 
-  } // ROOT of polynomial
+  }
+  // ROOT of polynomial
   // use N-R iteration...
   else if (command == "root") {
     cout << "---- ROOTS ----" << endl;
     // check for invalid # of arguments
     if (numArguments != 2) {
-      cout << "Invalid input. Enter 2 inputs." << endl;
+      cout << "Invalid input. Enter 2 values." << endl;
       return false;
     }
 
@@ -96,4 +116,9 @@ void lowercaseString(string &a) {
 // string starts with another string?
 bool stringStartsWith(string &item, string search) {
   return item.find(search) == 0;
+}
+
+bool isInvalidInput(string &a) {
+  int strSize = a.length();
+  return strSize <= 1;
 }

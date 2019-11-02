@@ -11,18 +11,31 @@ using namespace std;
 
 vector<string> splitByDelimiter(string &, char);
 
-// STRUCT Component
-struct Component;
+// STRUCT Monomial
+struct Monomial {
+  double coefficient;
+  int power;
+};
 
 // CLASS Polynomial:
 class Polynomial {
-  // PUBLIC members
-  public:
-    Polynomial(string);
-  
-  // PRIVATE members
-  // private:
-  //   vector<double> values;
+// PUBLIC members
+public:
+  // internal use constructor
+  Polynomial(vector<Monomial> &);
+  // constructor
+  Polynomial(string);
+  // add 2 polynomials:
+  Polynomial operator+(Polynomial &);
+
+  // multiply 2 polynomials:
+  Polynomial operator*(Polynomial &);
+
+  // toString for formatted output
+  string toString();
+
+// PRIVATE members
+  vector<Monomial> terms;
 };
 
 #endif // Polynomial_hpp
