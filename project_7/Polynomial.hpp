@@ -34,6 +34,9 @@ public:
   // get the derivative
   Polynomial derivative();
 
+  // roots using Newton Raphson Method (NR method)
+  void printRoots(Polynomial &);
+
   // toString for formatted output
   string toString();
 

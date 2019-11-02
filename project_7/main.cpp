@@ -29,6 +29,8 @@ int main() {
       cout << "Invalid input." << endl;
       break;
     }
+    // using "./poly < test.poly" results in absence of carriage return
+    cout << endl;
     // while the function doesn't return true
   } while(!handleCommand(userInput));
 
@@ -111,8 +113,9 @@ bool handleCommand(string &cmd) {
     // pull the polynomial from array & print it
     Polynomial a = Polynomial(components[1]);
     cout << "A: " << a.toString() << endl;
+    Polynomial b = a.derivative();
 
-    // cout << a.root() << endl;
+    a.printRoots(b);
 
   } else { // ELSE reprint out the user input
     cout << cmd << endl;

@@ -2,11 +2,17 @@
 #include <vector> // duh
 #include <sstream> // stringstream for toString
 #include <iomanip> // std::setprecision
+#include <string> // stod, stoi, etc.
+#include <cmath> // sqrt, fabs
 
 #include "Polynomial.hpp"
 #include "util.hpp"
 
 using namespace std;
+
+// N-R stuff:
+bool accurateEnough(double, double, double);
+double evalPolynomialAt(Polynomial, double);
 
 // first a constructor for if a vector of monomials is known:
 Polynomial::Polynomial(vector<Monomial> &copyValues) {
@@ -163,12 +169,57 @@ Polynomial Polynomial::derivative() {
   for (int i = 0; i < terms.size(); i++) {
     int exp = terms[i].power;
     double c = terms[i].coefficient;
-    Monomial t = { exp * c, exp - 1 };
-    newTerms.push_back(t);
+    if (exp - 1 == -1) {
+      // do nothing for derive x^0
+    } else {
+      Monomial t = { exp * c, exp - 1 };
+      newTerms.push_back(t);
+    }
+    
   }
 
   // same design as prev. functions, create a new poly based off the terms
   return Polynomial(newTerms);
+}
+
+// ------------------
+//     printRoots
+// ------------------
+// get the derivative, use that for evaluation
+
+void Polynomial::printRoots(Polynomial &b) {
+  vector<Monomial> c = b.terms;
+
+  double guess = 10;
+  double lastGuess;
+  // just in case
+  int overflowFallback = 1;
+  double tangentValue = 0.0;
+  // its reasonable to assume that the value should converge in 100 runs
+  while (overflowFallback <= 100) {
+    lastGuess = guess;
+    // get intersection of the tangent with the x axis (when y = 0)
+    tangentValue = evalPolynomialAt(b, guess);
+    
+    // if the tangent is 0, we won't divide by 0!
+    if (tangentValue == 0) {
+      guess = 0;
+      break;
+    }
+    // else make a guess
+    guess = (-1 * evalPolynomialAt(*this, guess)/tangentValue) + guess;
+    
+    // if accurate enough
+    if (accurateEnough(lastGuess, guess, 0.0000001)) {
+      break;
+    }
+    overflowFallback += 1;
+  }
+
+  // now guess (double) is the estimate of the zero
+  // of the polynomial (this) since the usage is a.printRoots(Poly deriv)
+  cout << "Root location: " << guess << endl;
+  cout << "Value @ " << setprecision(4) << guess << " is " << setprecision(8) << evalPolynomialAt(*this, guess) << endl;
 }
 
 // ------------------
@@ -211,4 +262,23 @@ string Polynomial::toString() {
     }
   }
   return ss.str();
+}
+
+double evalPolynomialAt(Polynomial s, double loc) {
+  double total = 0;
+  
+  for (int i = 0; i < s.terms.size(); i++) {
+    double c = s.terms[i].coefficient;
+    double e = (double)s.terms[i].power; // cast just to be safe
+    total += (c*pow(loc, e));
+  }
+
+  return total;
+}
+
+// check if value squared 
+bool accurateEnough(double v1, double v2, double percentAccuracy) {
+  double decimal = percentAccuracy / 100;
+  // is the abs difference between v1 & v2 enough?
+  return fabs(v1 - v2) < (decimal * v1);
 }
