@@ -27,9 +27,9 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
-  // [ ] iterative solution
+  // [x] iterative solution
   double newtonIterativeGuess = newtonRaphsonSquareRootIterative(squaredValue);
-  // [ ] recursive solution
+  // [x] recursive solution
   double recursiveGuess = squaredValue / 2;
   int recursiveIteration = 0;
   double newtonRecursive = newtonRaphsonSquareRootRecursive(squaredValue, recursiveGuess, recursiveIteration);

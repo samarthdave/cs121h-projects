@@ -1,0 +1,83 @@
+---------------------
+CSCE 121H - Fall 2019
+Project 6 - Cities
+due: Fri Oct 18, 8:00am
+---------------------
+
+The objective of this assignment is to write a C++ program for
+calculating distances among cities in Texas given their
+latitude/longitude coordinates.  The coordinates for 50 cities can be
+loaded from a file ((based on locations of airports; see link on
+course website).  The filename will be given on the command line.
+
+If no additional arguments are given, then for each city, print out the
+closest and farthest other city in Texas.
+
+> cities texas-cities.dat 
+Abilene         closest=Brownwood       (60.6 mi), farthest=Brownsville     (470.7 mi)
+Alice           closest=Kingsville      (20.5 mi), farthest=Dalhart         (631.3 mi)
+Amarillo        closest=Dalhart         (72.6 mi), farthest=Brownsville     (693.1 mi)
+...
+closest cities:  X and Y, dist=Z mi
+farthest cities: A and B, dist=C mi
+
+
+Use this to figure out the closest and farthest pair of cities in the list.
+
+
+If a city C and an integer N are provided on the command line, print out the
+N closest other cities to C.
+
+> cities texas-cities.dat CollegeStation 5
+Hooks (60.3 mi)
+Temple (73.7 mi)
+Houston (74.1 mi)
+Austin (81.6 mi)
+Killeen (85.1 mi)
+
+Suggestions: put lat/long pairs in a struct for coordinates; use sort().
+
+
+Converting distance between points based on lat/long.
+-----------------------------------------------------
+
+One can use the Haversine formula to convert the distance between
+two points given in lan/long into miles.
+It is based on this formulat
+
+  haversine(theta) = sin^2(theta/2)
+
+which can be used to calculate shortest distance on the surface
+of a sphere (i.e. great circle, or geodesic).
+
+Here is a description of the calculation from
+http://andrew.hedges.name/experiments/haversine/
+
+  convert lat1, lon1, lat2, lon2 from degrees to radians
+
+  dlon = lon2 - lon1
+  dlat = lat2 - lat1
+  a = (sin(dlat/2))^2 + cos(lat1) * cos(lat2) * (sin(dlon/2))^2
+  c = 2 * atan2( sqrt(a), sqrt(1-a) )
+  d = R * c (where R is the radius of the Earth, 3961 miles on average) 
+
+Even though you can probably easily find a C++ implementation for this
+function on the Internet, WRITE YOUR OWN CODE!
+
+
+
+Just for fun...
+---------------
+A real challenge is to compute the optimal order of cities that would
+visit them all in a minumum total distance.  This is an instance of
+the Travelling Salesman Problem, which in NP-hard.  There are 50!
+possible tours (sequences as permutation of cities).  However, one can
+use a greedy algorithm, or a stochastic algorithms like Simulated
+Annealing to find tours of near-optimal length ~3600 miles.
+
+
+
+
+
+
+

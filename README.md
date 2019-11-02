@@ -1,10 +1,16 @@
 # cs121h-projects
 My projects/submissions for CSCE 121 H
 
-### Some inspiration
-> A year from now, you will wish you had started today.
+## Some inspiration
+> And now that you don't have to be perfect, you can be good.
 
 ## Projects overview (ordered most recent to least)
+
+Look at each project's README for more information.
+
+#### [Project 7 - Polynomials](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project7.txt)
+
+#### [Project 6 - Cities](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project6.txt)
 
 #### [Project 5: Genomics](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project5.txt)
 Analyze DNA from *.fasta file, protein table, amino acid sequences
