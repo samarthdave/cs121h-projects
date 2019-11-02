@@ -151,6 +151,27 @@ Polynomial Polynomial::operator+(Polynomial &poly2) {
 }
 
 // ------------------
+//       DERIVE
+// ------------------
+// override c++ addition operator for A+B
+
+Polynomial Polynomial::derivative() {
+  // you know the drill by now
+  vector<Monomial> newTerms;
+
+  // for (int i = terms.size() - 1; i >= 0; i--) {
+  for (int i = 0; i < terms.size(); i++) {
+    int exp = terms[i].power;
+    double c = terms[i].coefficient;
+    Monomial t = { exp * c, exp - 1 };
+    newTerms.push_back(t);
+  }
+
+  // same design as prev. functions, create a new poly based off the terms
+  return Polynomial(newTerms);
+}
+
+// ------------------
 //      toString
 // ------------------
 // use string stream to print out a formatted polynomial
@@ -178,7 +199,15 @@ string Polynomial::toString() {
     // if next item exists
     if (i+1 < termsCount) {
       // if next term's coeffiicent is < 0, then add space, else add plus sign
-      ss << ((terms[i+1].coefficient < 0) ? " " : " + ");
+      if (terms[i+1].coefficient < 0) {
+        ss << " ";
+      } else if (terms[i+1].coefficient > 0) {
+        ss << " + ";
+      }
+      // no need but for semantics only
+      // else { // equal to 0!
+      //   ss << "";
+      // }
     }
   }
   return ss.str();

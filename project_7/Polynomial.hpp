@@ -31,6 +31,9 @@ public:
   // multiply 2 polynomials:
   Polynomial operator*(Polynomial &);
 
+  // get the derivative
+  Polynomial derivative();
+
   // toString for formatted output
   string toString();
 

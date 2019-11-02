@@ -14,6 +14,8 @@ int main() {
   cout << "|      Polynomial     |" << endl;
   cout << "+---------------------+" << endl;
 
+  cout << "Options: [sum, prod, deriv, root, quit]\n" << endl;
+
   string userInput = "";
 
   do {
@@ -89,6 +91,12 @@ bool handleCommand(string &cmd) {
       return false;
     }
 
+    // pull the polynomial from array & print it
+    Polynomial a = Polynomial(components[1]);
+    cout << "A: " << a.toString() << endl;
+    // print the derivative
+    cout << a.derivative().toString() << endl;
+
   }
   // ROOT of polynomial
   // use N-R iteration...
@@ -99,6 +107,12 @@ bool handleCommand(string &cmd) {
       cout << "Invalid input. Enter 2 values." << endl;
       return false;
     }
+
+    // pull the polynomial from array & print it
+    Polynomial a = Polynomial(components[1]);
+    cout << "A: " << a.toString() << endl;
+
+    // cout << a.root() << endl;
 
   } else { // ELSE reprint out the user input
     cout << cmd << endl;
