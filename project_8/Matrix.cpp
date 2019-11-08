@@ -40,7 +40,6 @@ Matrix::Matrix(const Matrix &p) {
 float Matrix::get(int row, int col) {
   if (!isValidLoc(row, col)) {
     exit(1);
-    return -1.0;
   }
   // now loop through and find it
   return heapArray[row][col];
