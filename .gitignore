@@ -13,5 +13,9 @@
 
 # should probably have included the prot & fasta files from the start
 *.fasta
+
 # they tend to be in 5-10 MB range...
 *.prot_table
+
+# ignore data files
+*.data
