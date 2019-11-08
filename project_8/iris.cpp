@@ -157,16 +157,8 @@ int main(int argv, char *argc[]) {
       correlation.set(i, j, covariance.get(i,j) / sqrt(covariance.get(i,i) * covariance.get(j,j)));
     }
   }
-  
+
+  cout << "Correlation matrix: " << endl;
   correlation.print();
 
-
-  // cout << ().toString() << endl;
-
 }
-
-// char to_lowercase(char c) {
-// 	if (c >= 'A' && c <= 'Z')
-// 		return c + 32;
-// 	return c;
-// }
