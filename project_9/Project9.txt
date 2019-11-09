@@ -1,0 +1,135 @@
+---------------------
+CSCE 121H - Fall 2019
+Project 9 - Keywords
+due: Fri Nov 15, 8:00am
+---------------------
+
+The objective of this assignment is to write a program to analyze a
+text document and extract keywords.  This could be useful for
+annotating/indexing a document collection, or for making Word Clouds.
+
+For this project, you will need to use unordered_maps, also known as
+hash tables.  The central step is to create a map to store the counts
+of words that appear in a document.  Then one could sort it and print
+out the most frequent words.
+
+The problem is that the most frequent words are almost always
+uninformative, uninterestng words, like 'and', 'a', and 'the'.  These
+are known as "stop words".  One approach would be to try to filter
+these out using a predefined list of common words.  Instead, we are
+going to use a different approach.  Suppose the document comes from a
+collection.  For example, suppose it is one of the 10 Books from
+Aritstotle's Ethics.  Then we can use the frequencies of words in the
+whole document collection as a reference.  A word like "the" occurs
+frequently in Book 2, but it also occurs frequently in all the Books.  
+This suggests that a different method for identifying meaningful,
+representative words is to compute the ratio of the frequency of each
+word in a particular document to the frequency of that word over the
+whole collection.
+
+Here is a particular implementaion of this idea.  For a word W in
+document D, compute the number of times W occurs in D, N(W,D), and the
+total number of words in the document, N(D).  Then do the same thing
+for the whole document collection C - compute N(W,C) and N(C).
+Next, compute the expected number of words in X based on C
+as follows:
+
+  freq(W,C) = N(W,C) / N(C)
+  expect(W,D) = N(D) * freq(W,C)
+
+Finally, you can compute the "relative enrichment" of 
+the word W in document D compared to C as:
+
+  enrich(W,D) = N(W,D) / expect(W,D)
+
+You can then print out the words in the document sorted by enrichment.
+However, if you try this literally, you might observe that the
+keywords are not very compelling.  The most enriched words are often
+words that occur infrequently overall.  An improvement is to add in
+pseudo-counts to the enrichment ratio (to both the numerator and
+denominator).  Here is the adjusted formula:
+
+  enrich(W,D) = (N(W,D)+PC) / (expect(W,D)+PC)
+
+Try setting PC to 5 and see if it makes the most enriched words
+more interesting and representative (compared to PC=0).
+
+
+
+About your program
+------------------
+
+Suppose your program is called 'keywords'.  If you call it with one
+command line argument (a text document), it will read-in the document,
+count all the words, and print them out in sorted order.
+
+In order to combine counts for variants of the same word, here is some of the
+processing you should apply:
+
+1. convert all characters to lower-case (to get rid of capitalization)
+1. remove digits (e.g. including years)
+2. remove punctuation: ",.?;:'!()[]$/
+3. note: keep hyphens (-)
+
+This is not perfect, but it will be good enough.  It doesn't properly
+handle contractions, and it does not handle variations like plurals of
+nouns (e.g. 'dog' versus 'dogs') or past tense of verbs (e.g. 'say'
+vs. 'said').  In real document analysis, this is called 'stemming',
+but is rather complicated.
+
+Here is an example (from the concatenation of all 10 Books):
+
+> keywords Aristotle_Ethics.txt
+6842 the 
+4594 of 
+3936 and 
+3506 to 
+3487 is 
+2682 in 
+1976 a 
+1574 it 
+1514 that 
+1468 are 
+1462 be 
+1280 for 
+1279 as 
+1265 not 
+1137 but 
+1093 or 
+1019 which 
+...
+
+
+If you now want to use this to analyze a particular document,
+give the name of a second fileaname on the command line.
+
+> words Aristotle_Ethics.txt Aristotle_Ethics_Book1.txt
+WORD                  num(doc)  freq(doc)     num(all)  freq(all)     expected   ratio
+goods               	22	      0.002425      	49	    0.000424	      3.8	    3.0523
+soul                	23	      0.002535      	54	    0.000467	      4.2	    3.0309
+happy               	25	      0.002756      	66	    0.000571	      5.2	    2.9469
+happiness           	34	      0.003748      	119	    0.001030	      9.3	    2.7197
+blessed             	12	      0.001323      	18	    0.000156	      1.4	    2.6510
+manifestly          	11	      0.001213      	14	    0.000121	      1.1	    2.6235
+life                	39	      0.004299      	161	    0.001393	      12.6	  2.4949
+excellence          	19	      0.002094      	62	    0.000536	      4.9	    2.4326
+...
+
+
+Document Collections for Testing
+--------------------------------
+
+Two document collections are provided as .zip files that can be
+downloaded from the course website: Ethics by Artistotle (10 Books),
+and The Federalist Papers (83 essays, fed00-fed82).  These were
+downloaded from Project Gutenberg.  They are provided in both
+concatenated form (1 file), and split up into separate documents.  For
+the Federalist paper, beware that the filename does not correspond
+directly to the conventional numbers of the articles, for example,
+fed10 actually holds Federalist Paper No. 12.  See titles.txt for the
+correspondence.
+
+To get a quick overview of the contents of the individual documents, see this:
+
+https://en.wikipedia.org/wiki/Nicomachean_Ethics
+https://en.wikipedia.org/wiki/The_Federalist_Papers

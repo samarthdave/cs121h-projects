@@ -2,7 +2,7 @@
 My projects/submissions for CSCE 121 H
 
 ## Some inspiration
-> And now that you don't have to be perfect, you can be good.
+> Live as if you were to die tomorrow. Learn as if you were to live forever.
 
 ## Projects overview (ordered most recent to least)
 
