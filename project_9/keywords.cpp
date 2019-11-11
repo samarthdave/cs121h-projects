@@ -29,18 +29,23 @@ int main(int argc, const char** argv) {
   cout << "------------------------" << endl;
 
   vector<string> args;
-  int subtractCount = 0; // use this to remove flags from the counter
   // get arguments and parse for flags
   for (int i = 0; i < argc; i++) {
-    args.push_back(argv[i]);
-    // check if flag for max
-    if (lowercase(args[i]) == "--max" && (i+1) < argc) {
+    // show command line args
+    printf("Argument i=%d : %s\n", i, argv[i]);
+
+    // check if it's a flag and get next item
+    if (lowercase(argv[i]) == "--max" && (i+1) < argc) {
       MAX_WORDS = stoi(argv[i+1]);
-      subtractCount += 2; // "./keywords ... --max 35 ..."
+      i += 1;
+      continue;
     }
-    printf("Argument %d : %s\n", i, argv[i]);
+    
+    // if not a flag, push
+    args.push_back(argv[i]);
   }
-  int argCount = args.size() - subtractCount;
+  
+  int argCount = args.size();
   
   if (argCount < 2 || argCount > 3) {
     cerr << "Error: Invalid number of arguments provided." << endl;
@@ -165,7 +170,7 @@ bool simplify(string &text) {
   // [x] remove punctuation
   for (int i = 0, len = text.length(); i < len; i++) {
     // remove all punctuation expect hyphens
-    if (ispunct(text[i]) && text[i] != '-')) {
+    if (ispunct(text[i]) && text[i] != '-') {
       text.erase(i--, 1);
       len = text.size();
     }
