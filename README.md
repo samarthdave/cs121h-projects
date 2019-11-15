@@ -8,9 +8,19 @@ My projects/submissions for CSCE 121 H
 
 Look at each project's README for more information.
 
+#### [Project 9 - Keywords](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project9.txt)
+- hash tables/unordered maps
+- read in file(s) & analyze word frequency against collection
+
+#### [Project 8 - Matrix](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project8.txt)
+- learn classes with Matrix operations
+- Data Science application
+
 #### [Project 7 - Polynomials](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project7.txt)
+- Read user input of text and perform operations on polynomials
 
 #### [Project 6 - Cities](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project6.txt)
+- Calculate the approximate distance between 2 points in Texas
 
 #### [Project 5: Genomics](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project5.txt)
 Analyze DNA from *.fasta file, protein table, amino acid sequences
