@@ -105,14 +105,14 @@ give the name of a second fileaname on the command line.
 
 > words Aristotle_Ethics.txt Aristotle_Ethics_Book1.txt
 WORD                  num(doc)  freq(doc)     num(all)  freq(all)     expected   ratio
-goods               	22	      0.002425      	49	    0.000424	      3.8	    3.0523
-soul                	23	      0.002535      	54	    0.000467	      4.2	    3.0309
-happy               	25	      0.002756      	66	    0.000571	      5.2	    2.9469
-happiness           	34	      0.003748      	119	    0.001030	      9.3	    2.7197
-blessed             	12	      0.001323      	18	    0.000156	      1.4	    2.6510
-manifestly          	11	      0.001213      	14	    0.000121	      1.1	    2.6235
-life                	39	      0.004299      	161	    0.001393	      12.6	  2.4949
-excellence          	19	      0.002094      	62	    0.000536	      4.9	    2.4326
+goods               	22	0.002425	49	0.000424	3.8	3.0523
+soul                	23	0.002535	54	0.000467	4.2	3.0309
+happy               	25	0.002756	66	0.000571	5.2	2.9469
+happiness           	34	0.003748	119	0.001030	9.3	2.7197
+blessed             	12	0.001323	18	0.000156	1.4	2.6510
+manifestly          	11	0.001213	14	0.000121	1.1	2.6235
+life                	39	0.004299	161	0.001393	12.6	2.4949
+excellence          	19	0.002094	62	0.000536	4.9	2.4326
 ...
 
 
