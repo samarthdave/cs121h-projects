@@ -29,19 +29,6 @@ string lowercase(string);
 // global: max output from cli, change using --max flag
 int MAX_WORDS = 20;
 
-
-
-vector<string> whitelist = {
-  "goods",
-  "soul",
-  "happy",
-  "happiness",
-  "blessed",
-  "manifestly",
-  "life",
-  "excellence"
-};
-
 int main(int argc, const char** argv) {
   cout << "------------------------" << endl;
   cout << "         Keywords       " << endl;
@@ -254,9 +241,7 @@ void printSimple(vector< pair<string,int> > &pairs) {
   int c = 0;
   
   for (auto pair : pairs) {
-    if (find(whitelist.begin(), whitelist.end(), pair.first) != whitelist.end()) {
-      cout << setw(4) << pair.second << " " << pair.first << endl;
-    }
+    cout << setw(4) << pair.second << " " << pair.first << endl;
     c++;
     if (c >= MAX_WORDS) {
       cout << "Printed " << MAX_WORDS << " items. Use \"--max\" flag for more." << endl;
