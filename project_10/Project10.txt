@@ -1,0 +1,265 @@
+---------------------
+CSCE 121H - Fall 2019
+Project 10 - Elevator Simulation
+due: Fri Nov 22, 8:00am
+---------------------
+
+The goal of this assignment is to write a simulation of an elevator
+system.  You will make a model of a building with F floors servd by C
+elevator cars.  It will be an event-driven simulator, where, with each
+time-step, new passengers can arrive on floors, elevators can move
+between floors, or pick-up or drop-off passengers.  The input will
+include a "traffic" file that specifies randomly generated passengers,
+when they arrive, and their source and destination floors.
+
+Initially, I recommend you should develop your simulation with the
+following parameters: the building has 5 floors (numbered 0-4), and
+there is only 1 car, and the simulation runs for 100 time-steps.
+Actually, these will be command-line arguments
+
+> elevator <timesteps> <floors> <car> <trafficfile>
+
+The format of the traffic file looks like this:
+
+floors <N> iters <N>
+PERSON id <N> time <N> src <N> dest <N>
+...
+
+Here is an example:
+
+traffic_10_100_0.5.dat:
+-----------------------
+floors 10 iters 100
+PERSON id 0 time 80 src 0 dest 3
+PERSON id 1 time 5 src 4 dest 5
+PERSON id 2 time 73 src 7 dest 8
+...
+PERSON id 48 time 52 src 2 dest 5
+PERSON id 49 time 34 src 4 dest 2
+
+With each time-step, your simulation should check for arrival of new
+passengers on floors, and then call an update() function on each of
+the floors and cars.  On floors, passengers press call buttons for the
+direction they are travelling.  When cars stop at floors, some people
+disembark (if that is their destination), and others embark (that are
+waiting on that floor for a car going their direction).  The
+passengers press buttons in the car for their destination, and the car
+clears the direction button on the floor.  
+
+A car has to stop for at least 1 time-step to let people on and off,
+but doesn't have to stop at floors if there are no calls (inside car
+or on floor) This is especially important for efficiency if your
+simulation has multiple cars.  In this case, if one car is servicing a
+floor, the other cars (moving in same direction) don't have to stop
+and can pass by that floor.
+
+With each time-step, you should print out the status of all the floors
+and cars, like this:
+
+> elevator 100 5 1 traffic_5_100_0.5.dat
+
+iter=0
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[0]*
+CAR 0, floor 0, load 0, state 0, dir 1, buttonsPressed: 
+
+iter=1
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[0]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 0, state 1, dir 1, buttonsPressed: 
+
+iter=2
+new person 17 arriving on floor 0, dest=3
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[0]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 0, state 1, dir 1, buttonsPressed: 
+
+Of course, when passengers embark or disembark, print out messages
+for those event too.
+
+At the end of the simulation, print out a summary of all floors, cars,
+and passengers (sorted by start time).  For floors and cars, report
+how many passengers remain.  For ALL passengers in the simulation,
+report when they were picked up and dropped off, and their overall
+waiting time.  The distribution of waiting times should be a indicator
+of the overall efficiency of the simulation.  For heavier traffic
+loads or more floors, you might need multiple cars to keep the waiting
+times down.
+
+summary
+on floor 3: PERSON id 22 src 3 dest 1 start 98 embarked -1 arrived -1 WAITING on FLOOR 3
+in car 0: PERSON id 42 src 1 dest 2 start 96 embarked 99 arrived -1
+in car 0: PERSON id 29 src 1 dest 2 start 98 embarked 99 arrived -1
+PERSON id 17 src 0 dest 3 start 2 embarked 11 arrived 16 ARRIVED traveltime 14
+PERSON id 30 src 4 dest 3 start 3 embarked 4 arrived 6 ARRIVED traveltime 3
+PERSON id 2 src 4 dest 2 start 4 embarked 4 arrived 8 ARRIVED traveltime 4
+PERSON id 20 src 1 dest 3 start 5 embarked 13 arrived 16 ARRIVED traveltime 11
+PERSON id 40 src 0 dest 3 start 6 embarked 11 arrived 16 ARRIVED traveltime 10
+PERSON id 10 src 3 dest 0 start 9 embarked 20 arrived 26 ARRIVED traveltime 17
+PERSON id 4 src 3 dest 2 start 10 embarked 20 arrived 29 ARRIVED traveltime 19
+PERSON id 4 src 3 dest 2 start 10 embarked 20 arrived 22 ARRIVED traveltime 12
+...
+
+Example traffic files and a full transcript will be posted on the
+course website.
+
+===============================================================
+
+Implementation
+--------------
+
+Implement this project using the following classes in C++.  You should
+put each of your classes in separate source files (and put them in a
+directory for Project10 on GitHub, with makefile.)  
+
+Person is pretty simple, just has id, source and destination floor,
+and keeps track of times when embark or disembark.
+
+Floors and Cars are both sub-classes of a general class called
+Container, which has a vector of Persons and a vector of bools
+representing buttons.  Provide member functions for pressing,
+checking, and clearing buttons, and for adding or removing persons.  A
+Floor is a specialization that has just 2 buttons, up and down.  A Car
+has buttons for each floor.
+
+Finally, there is a Building class, which has a vector of floors and a
+vector of cars.  The role of the Building class is to have the
+initialization code, the run() loop, and the code to print the summary
+at the end.  The run() has the loop (for desired iterations) in which
+it prints the status of floors and cars, checks for new passengers
+arriving on floors, and then call update() on all the floors and cars.
+The Building initially has a list of all person (from reading in the
+traffic file).  As their start time arrives, the get moved to floors,
+and then to cars, and finally back to the list of all persons when
+they arrive at their destination.
+
+
+enum Dir { DOWN=0, UP=1 };
+
+class Person
+{
+  int id;
+  int start; // time when arrives at source floor
+  int src; // source floor
+  int dest; // destination floor
+  int embarkTime; // boarding car
+  int arriveTime; // arriving at destination flloor
+
+public:
+
+  Person(int i,int Time,int s,int d); // constuctor: pass-in id, time, src, dest
+  bool operator==(const Person& p); // based on id, to check if 2 persons are same
+  bool operator<(const Person& p); // based on start time, for sorting
+  void setEmbarkTime(int x)
+  void setArriveTime(int x)
+  Dir dir(); // what direction are they travelling?
+  void print();
+};
+
+
+class Container
+{
+  vector<bool> buttons; // true means pressed
+  vector<Person> persons;
+
+public:
+
+  void Press(int f);
+  bool Pressed(int f);
+  void Reset(int f);
+  void AddPerson(Person p);
+  void RemovePerson(Person p);
+};
+
+
+class Floor : public Container
+{
+  int id;
+
+public:
+
+  Floor(int i); // pass-in id; initialize 2 buttons to false
+  bool UpPressed();
+  bool DownPressed();
+  void PressUp();
+  void PressDown();
+  void ClearUp();
+  void ClearDown();
+  string toString();
+};
+
+
+class Car : public Container
+{
+  int id; // set in constructor
+  int floor;
+  int capacity; // don't let more than this many poeple on
+  enum State { IDLE, MOVING, OPENING, CLOSING, LOADING, UNLOADING, CLOSED }; // whatever states you want
+  State state;
+  Dir dir; // what direction is car moving?
+  int nfloors;
+
+public:
+
+  Car(int i,int f); // initialize with id and number of floors; initilize state, dir, and buttons
+  string toString();
+  void printSymbolic(); // print something like "CAR0[3]^"
+  // this is where all the logic goes...
+  void update(vector<Floor>& floors,int iter,vector<Person>& allpersons); // *****
+  // it is important to get these functions right...
+  void embark(Floor& floor,int iter);
+  void disembark(Floor floor,int iter,vector<Person>& allpersons);
+};
+
+
+class Building
+{
+  int ncars;
+  int nfloors;
+  int ITERS;
+
+  vector<Floor> floors;
+  vector<Car> cars;
+  vector<Person> persons;
+
+public:
+
+  void AddPerson(Person p);
+  void RemovePerson(Person p);
+  void readin_traffic(char* fname);
+  Building(int numiters,int numfloors,int numcars,char* fname);
+  void NewArrivals(int iter); // check for person whose start time has arrived
+  void summary(); // print-out all persons, cars, and floors at end
+  void run()
+  {
+    for (int iter=0 ; iter<ITERS ; iter++)
+    {
+      cout << endl << "iter=" << iter << endl;
+      // check for Persons whose start time is now, move to source floor
+      NewArrivals(iter); 
+
+      // print out contents of floors and cars
+      for (int i=0 ; i<nfloors ; i++) 
+      { 
+        int f=nfloors-i-1;
+        cout << floors[f].toString();
+        for (int j=0 ; j<C ; j++)
+          if (cars[j].floor==f) cars[j].printSymbolic();
+        cout << endl; 
+      }
+      for (int i=0 ; i<C ; i++) cout << cars[i].toString() << endl;
+
+      // update cars...
+      for (int i=0 ; i<C ; i++) cars[i].update(floors,iter,persons);
+    }
+  }
+};
