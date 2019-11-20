@@ -1,0 +1,21 @@
+floors 5 iters 100
+PERSON id 0 time 16 src 4 dest 1
+PERSON id 1 time 24 src 1 dest 2
+PERSON id 2 time 68 src 4 dest 1
+PERSON id 3 time 73 src 3 dest 0
+PERSON id 4 time 92 src 0 dest 1
+PERSON id 5 time 91 src 0 dest 2
+PERSON id 6 time 93 src 0 dest 1
+PERSON id 7 time 9 src 3 dest 2
+PERSON id 8 time 0 src 1 dest 0
+PERSON id 9 time 17 src 2 dest 4
+PERSON id 10 time 60 src 4 dest 2
+PERSON id 11 time 17 src 2 dest 1
+PERSON id 12 time 58 src 0 dest 1
+PERSON id 13 time 6 src 0 dest 1
+PERSON id 14 time 54 src 3 dest 2
+PERSON id 15 time 99 src 4 dest 1
+PERSON id 16 time 93 src 4 dest 2
+PERSON id 17 time 96 src 0 dest 2
+PERSON id 18 time 5 src 0 dest 3
+PERSON id 19 time 72 src 4 dest 3

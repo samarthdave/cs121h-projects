@@ -10,6 +10,7 @@
 
 # also object files that are compiled with make files
 *.o
+*.out
 
 # should probably have included the prot & fasta files from the start
 *.fasta
