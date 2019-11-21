@@ -1,7 +1,7 @@
 CC = g++
 F1 = --std=c++11
 
-all: elevator
+all: elevator move
 
 elevator: main.o Building.o Floor.o Car.o Person.o
 	$(CC) $(F1) -o elevator main.o Building.o Floor.o Car.o Person.o
@@ -20,6 +20,13 @@ Car.o: Car.cpp Car.hpp
 
 Person.o: Person.cpp Person.hpp
 	$(CC) $(F1) -c Person.cpp
+
+move:
+	mv *.o ./build
+	mv elevator ./build
+
+run:
+	./build/elevator
 
 # phony assumes the file is always out of date
 .PHONY: clean

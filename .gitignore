@@ -21,6 +21,10 @@
 # ignore data files
 *.data
 
+# ignore all files in a build directory
+build/
+build/*
+
 # project 9:
 # ignore all the text files
 /project_9/docs/*
