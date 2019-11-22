@@ -24,6 +24,9 @@ Person.o: Person.cpp Person.hpp
 move:
 	mv *.o ./build
 	mv elevator ./build
+	@echo "--------------------------"
+	@echo 'type "make run" to execute'
+	@echo "--------------------------"
 
 run:
 	./build/elevator

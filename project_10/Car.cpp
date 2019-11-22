@@ -9,5 +9,5 @@ Car::Car(int i, int f) {
 }
 
 string Car::toString() {
-  return "car to string";
+  return "Car toString()";
 }

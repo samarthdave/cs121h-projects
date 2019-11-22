@@ -25,6 +25,8 @@ int main(int argc, char ** argv) {
 
   Building b = Building(timesteps, floors, cars, filename);
 
-  b.summary();
+  b.run();
+
+  // b.summary();
 
 }
