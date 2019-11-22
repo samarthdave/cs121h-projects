@@ -4,6 +4,7 @@
 #include <sstream>
 #include <vector>
 #include <cmath> // sqrt
+#include <stdexcept>
 
 #include "Matrix.hpp"
 
@@ -24,15 +25,25 @@ int main(int argv, char *argc[]) {
   cout << "Project 8: Application 1 - Iris" << endl;
   cout << "-------------------------------" << endl;
   
+  // Use Error Handling (11/22):
+  string filename, selectedSpecies;
+  // try {
+  //   // read command line args
+  //   filename = argc[1];
+  //   selectedSpecies = argc[2];
+  // } catch(exception &e) {
+  //   cerr << "exception caught: " << e.what() << endl;
+  //   throw runtime_error("Could not read filename or species");
+  // }
+
   if (argv != 3) {
     cout << "ERROR, invalid input. Usage: \"./iriscorr FILENAME SPECIES\"" << endl;
     exit(1);
   }
-  
-  // read command line args
-  string filename = argc[1];
-  string selectedSpecies = argc[2];
 
+  filename = argc[1];
+  selectedSpecies = argc[2];
+  
   // lowercase species choice
   for (char &c: selectedSpecies) { c = tolower(c); }
 
