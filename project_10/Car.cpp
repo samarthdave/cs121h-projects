@@ -12,9 +12,9 @@ Car::Car(int i, int f) {
   cout << "car constructor: " << i << " and " << f << endl;
 }
 
-// toString returns car information (eg. "CAR0[3]^")
+// printSymbolic returns car information (eg. "CAR0[3]^")
 // car num + floor + direction
-string Car::toString() {
+void Car::printSymbolic() {
   stringstream ss;
   // car number
   ss << "CAR" << (this->id) << "[" << (this->floor) << "]";
@@ -22,7 +22,8 @@ string Car::toString() {
   // check state and add direction if needed
   switch (this->state) {
     case Car::MOVING:
-      ss << ((this->dir == 0) ? "v" : "^"); // 0 is down, 1 is up
+      // 0 is down, 1 is up
+      ss << ( (this->dir == 0) ? "v" : "^" );
     case Car::IDLE:
       // hit default case
       // ss << "*";
@@ -31,12 +32,7 @@ string Car::toString() {
       break;
   }
 
-  return ss.str();
-}
-
-// print cout
-void Car::printSymbolic() {
-  cout << this->toString();
+  cout << "SYMBOLIC: " << ss.str() << endl;;
 }
 
 // void Car::update(vector<Floor> & floors, int iter, vector<Person> & allpersons);

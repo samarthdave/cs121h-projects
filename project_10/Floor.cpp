@@ -1,15 +1,39 @@
 #include <iostream>
+#include <sstream>
 
 #include "Floor.hpp"
 
 using namespace std;
 
 Floor::Floor(int i) {
-  cout << "hit floor constructor with " << i << endl;
+  cout << "[FLOOR]: " << i << endl;
+  this->id = i;
 }
 
 string Floor::toString() {
-  return "here is the floor to string";
+  stringstream ss;
+  // FLOOR 1, persons 0, up 0, down 0
+  // add floor #
+  ss << "FLOOR " << id << ", ";
+
+  // need to access parent
+  int count = Container::persons.size();
+  // add person count
+  ss << "persons " << count << ", ";
+
+  // up or down count?
+  ss << "up " << UpPressed() << ", ";
+  ss << "down " << DownPressed();
+
+  return ss.str();
+}
+
+bool Floor::UpPressed() {
+  return false;
+}
+
+bool Floor::DownPressed() {
+  return true;
 }
 
 // class Floor : public Container {
@@ -17,9 +41,6 @@ string Floor::toString() {
 //   int id;
 // // public members
 // public:
-//   Floor(int i); // pass-in id; initialize 2 buttons to false
-//   bool UpPressed();
-//   bool DownPressed();
 //   void PressUp();
 //   void PressDown();
 //   void ClearUp();

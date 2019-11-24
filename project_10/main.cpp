@@ -23,8 +23,8 @@ int main(int argc, char ** argv) {
   int cars = 1;
   string filename = "tests/traffic_5_100_0.2.txt";
 
-  // Building b = Building(timesteps, floors, cars, filename);
+  Building b = Building(timesteps, floors, cars, filename);
 
-  // b.run();
+  b.run();
 
 }

@@ -15,13 +15,16 @@ Building::Building(int numiters, int numfloors, int numcars, string fname) {
   this->nfloors = numfloors;
   this->ITERS = numiters;
 
-  // read in file
+  // push nfloors Floor classes into this->floors
+  for (int i = 0; i < numfloors; i++) {
+    Floor f_temp(i);
+    this->floors.push_back(f_temp);
+  }
+
+  // read in method
   this->readin_traffic(fname);
 }
 
-// void Building::AddPerson(Person p);
-// void Building::RemovePerson(Person p);
-// void Building::NewArrivals(int iter); // check for person whose start time has arrived
 
 void Building::readin_traffic(string &fname) {
   // check if valid file
@@ -53,7 +56,12 @@ void Building::readin_traffic(string &fname) {
       exit(1);
     } // error
     
+    // person info
     cout << id << " | " << timeIndex << " | " << src << " | " << dest << endl;
+    // Person p(id, timeIndex, src, dest);
+    // add ppl to the floors
+    // from the src
+    // floors[src].push_back(p);
   }
 }
 
@@ -68,26 +76,29 @@ void Building::summary() {
 
 // called from main
 void Building::run() {
-  
-  for (int iter = 0; iter < ITERS; iter++) {
-    int C = this->ncars;
+  // for (int iter = 0; iter < ITERS; iter++) {
+    // int C = this->ncars;
     // cout << endl << "iter=" << iter << endl;
     // check for Persons whose start time is now, move to source floor
     // NewArrivals(iter);
 
     // print out contents of floors and cars
-    // for (int i = 0; i < nfloors; i++) {
-    //   int f = nfloors - i - 1;
-    //   cout << (this->floors[f]).toString();
-    //   for (int j = 0; j < C; j++)
-    //     if ((this->cars[j]).floor == f) (this->cars[j]).printSymbolic();
-    //   cout << endl;
-    // }
+    for (int i = 0; i < nfloors; i++) {
+      int f = nfloors - i - 1;
+      cout << (this->floors[f]).toString() << endl;
+      // for (int j = 0; j < C; j++)
+      //   if ((this->cars[j]).floor == f) (this->cars[j]).printSymbolic();
+      // cout << endl;
+    }
     // for (int i = 0; i < C; i++) cout << (this->cars[i]).toString() << endl;
 
     // update cars...
     // for (int i = 0; i < C; i++) (this->cars[i]).update(this->floors, iter, this->persons);
-  }
+  // } // end iteration loop
 
   // this -> summary();
 }
+
+// void Building::AddPerson(Person p);
+// void Building::RemovePerson(Person p);
+// void Building::NewArrivals(int iter); // check for person whose start time has arrived

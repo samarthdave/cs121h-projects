@@ -9,6 +9,7 @@ using namespace std;
 
 class Container {
 // private members
+protected:
   vector<bool> buttons; // true means pressed
   vector<Person> persons;
 

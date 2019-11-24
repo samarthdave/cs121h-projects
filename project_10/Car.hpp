@@ -28,7 +28,9 @@ class Car : public Container {
 
 // public members
 public:
-  Car(int i, int f); // initialize with id and number of floors; initilize state, dir, and buttons
+  // initialize with id and # of floors;
+  // initilize state, dir, and buttons
+  Car(int i, int f);
   string toString();
   void printSymbolic(); // print something like "CAR0[3]^"
   // this is where all the logic goes...
