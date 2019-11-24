@@ -17,17 +17,17 @@ private:
   int nfloors;
   int ITERS;
 
-  vector <string> floors;
-  vector <string> cars;
-  vector <string> persons;
+  vector<Floor> floors;
+  vector<Car> cars;
+  vector<Person> persons;
 
 // public members
 public:
   Building(int numiters, int numfloors, int numcars, string fname);
-  void AddPerson(Person p);
-  void RemovePerson(Person p);
-  void readin_traffic(string fname);
-  void NewArrivals(int iter); // check for person whose start time has arrived
+  void AddPerson(Person &);
+  void RemovePerson(Person &);
+  void readin_traffic(string &);
+  void NewArrivals(int &); // check for person whose start time has arrived
   void summary(); // print-out all persons, cars, and floors at end
   void run();
 };

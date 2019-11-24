@@ -15,13 +15,14 @@ class Person {
   int arriveTime; // arriving at destination flloor
 // public members
 public:
-  Person(int i, int Time, int s, int d); // constuctor: pass-in id, time, src, dest
-  bool operator==(const Person & p); // based on id, to check if 2 persons are same
-  bool operator<(const Person & p); // based on start time, for sorting
+  Person(int, int, int, int); // constuctor: pass-in id, time, src, dest
+  bool operator==(const Person &); // based on id, to check if 2 persons are same
+  bool operator<(const Person &); // based on start time, for sorting
   void setEmbarkTime(int x);
   void setArriveTime(int x);
   Dir dir(); // what direction are they travelling?
-  void print();
+  // string toString();
+  void print(); // calls toString
 };
 
 #endif // guard for Person

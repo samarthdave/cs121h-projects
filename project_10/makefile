@@ -22,6 +22,7 @@ Person.o: Person.cpp Person.hpp
 	$(CC) $(F1) -c Person.cpp
 
 move:
+	mkdir -p build
 	mv *.o ./build
 	mv elevator ./build
 	@echo "--------------------------"

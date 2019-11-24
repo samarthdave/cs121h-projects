@@ -5,6 +5,8 @@
 
 #include "Building.hpp"
 #include "Person.hpp"
+#include "Floor.hpp"
+#include "Car.hpp"
 
 using namespace std;
 
@@ -12,6 +14,16 @@ Building::Building(int numiters, int numfloors, int numcars, string fname) {
   this->ncars = numcars;
   this->nfloors = numfloors;
   this->ITERS = numiters;
+
+  // read in file
+  this->readin_traffic(fname);
+}
+
+// void Building::AddPerson(Person p);
+// void Building::RemovePerson(Person p);
+// void Building::NewArrivals(int iter); // check for person whose start time has arrived
+
+void Building::readin_traffic(string &fname) {
   // check if valid file
   fstream file;
   file.open(fname);
@@ -34,19 +46,18 @@ Building::Building(int numiters, int numfloors, int numcars, string fname) {
     int id, timeIndex, src, dest;
     // PERSON id 1 time 24 src 1 dest 2
     if (!(iss >> a >> a >> id >> a >> timeIndex >> a >> src >> a >> dest)) {
+      cerr << "Error reading file: " << fname << endl;
       cerr << "Error reading in line: " << endl;
+
       cout << line << "\n" << string(20, '-') << endl;
+      exit(1);
     } // error
     
     cout << id << " | " << timeIndex << " | " << src << " | " << dest << endl;
   }
-
 }
 
-// void Building::AddPerson(Person p);
-// void Building::RemovePerson(Person p);
-// void Building::readin_traffic(string fname);
-// void Building::NewArrivals(int iter); // check for person whose start time has arrived
+// 
 void Building::summary() {
   cout << "Printing summary of building" << endl;
   cout << "num cars: " << this->ncars << endl;
@@ -55,9 +66,11 @@ void Building::summary() {
   cout << string(20, '-') << endl;
 }
 
+// called from main
 void Building::run() {
   
   for (int iter = 0; iter < ITERS; iter++) {
+    int C = this->ncars;
     // cout << endl << "iter=" << iter << endl;
     // check for Persons whose start time is now, move to source floor
     // NewArrivals(iter);
@@ -75,4 +88,6 @@ void Building::run() {
     // update cars...
     // for (int i = 0; i < C; i++) (this->cars[i]).update(this->floors, iter, this->persons);
   }
+
+  // this -> summary();
 }

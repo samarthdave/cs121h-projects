@@ -23,7 +23,7 @@ class Car : public Container {
     CLOSED
   }; // whatever states you want
   State state;
-  Dir dir; // what direction is car moving?
+  Dir dir; // 0 is down, 1 is up
   int nfloors;
 
 // public members
@@ -32,10 +32,10 @@ public:
   string toString();
   void printSymbolic(); // print something like "CAR0[3]^"
   // this is where all the logic goes...
-  void update(vector<Floor> & floors, int iter, vector<Person> & allpersons); // *****
+  // void update(vector<Floor> &, int, vector<Person> &);
   // it is important to get these functions right...
-  void embark(Floor & floor, int iter);
-  void disembark(Floor floor, int iter, vector<Person> & allpersons);
+  // void embark(Floor & floor, int iter);
+  // void disembark(Floor floor, int iter, vector<Person> & allpersons);
 };
 
 #endif // guard for Car
