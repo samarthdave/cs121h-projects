@@ -8,6 +8,10 @@ using namespace std;
 Floor::Floor(int i) {
   cout << "[FLOOR]: " << i << endl;
   this->id = i;
+
+  // down & up button are false
+  buttons.push_back(false);
+  buttons.push_back(false);
 }
 
 string Floor::toString() {
@@ -22,28 +26,33 @@ string Floor::toString() {
   ss << "persons " << count << ", ";
 
   // up or down count?
-  ss << "up " << UpPressed() << ", ";
-  ss << "down " << DownPressed();
+  ss << "up " << (this->UpPressed()) << ", ";
+  ss << "down " << (this->DownPressed());
 
   return ss.str();
 }
 
+// is it pressed? and press
 bool Floor::UpPressed() {
-  return false;
+  return this->buttons[1];
+}
+void Floor::PressUp() {
+  this->Press(1);
 }
 
+// is it pressed? and press
 bool Floor::DownPressed() {
-  return true;
+  return this->buttons[0];
 }
 
-// class Floor : public Container {
-// // private members
-//   int id;
-// // public members
-// public:
-//   void PressUp();
-//   void PressDown();
-//   void ClearUp();
-//   void ClearDown();
-//   string toString();
-// };
+void Floor::PressDown() {
+  this->Press(0);
+}
+
+// remove press
+void Floor::ClearUp() {
+  this->Reset(1);
+}
+void Floor::ClearDown() {
+  this->Reset(0);
+}

@@ -9,8 +9,8 @@ using namespace std;
 // [ ] constructor
 // [x] equality operator
 // [ ] comparison operator
-// [ ] setEmbarkTime(int x);
-// [ ] void setArriveTime(int x);
+// [x] void setEmbarkTime(int x);
+// [x] void setArriveTime(int x);
 // [ ] Dir dir(); // what direction are they travelling?
 // string toString();
 // void print(); // calls toString
@@ -38,19 +38,31 @@ string Person::toString() {
   ss << "PERSON: " << setw(3) << id << " ";
   ss << " src " << setw(3) << src; // start floor
   ss << " dest " << setw(3) << dest; // destination floor
+  // when they pressed!
   ss << " start " << setw(3) << start;
+  // when elevator got to person
   ss << " embarked " << setw(3) << embarkTime;
+  // when elevator dropped them off
   ss << " arrived " << setw(3) << arriveTime;
   // ARRIVED - is the person still on the elevator when simulation ends?
   // if person still on elevator then print
     // then print arrived -1
-  ss << " PLACEHOLDER ";
+  // ss << " PLACEHOLDER ";
 
-  ss << " travelTime " << setw(3) << (arriveTime - start);
+  // if (finishedTrip)
+  //   ss << " travelTime " << setw(3) << (arriveTime - start);
 
   return ss.str();
 }
 
 void Person::print() {
   cout << (this->toString()) << endl;
+}
+
+void Person::setEmbarkTime(int x) {
+  this->embarkTime = x;
+}
+
+void Person::setArriveTime(int x) {
+  this->arriveTime = x;
 }

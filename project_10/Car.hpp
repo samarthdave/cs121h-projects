@@ -10,9 +10,6 @@ using namespace std;
 
 class Car : public Container {
 // private members
-  int id; // set in constructor
-  int floor;
-  int capacity; // don't let more than this many poeple on
   enum State {
     IDLE,
     MOVING,
@@ -20,14 +17,18 @@ class Car : public Container {
     CLOSING,
     LOADING,
     UNLOADING,
+    // BUSY, // just a suggestion
     CLOSED
   }; // whatever states you want
+  int id; // set in constructor
+  int capacity; // don't let more than this many poeple on
   State state;
   Dir dir; // 0 is down, 1 is up
   int nfloors;
 
 // public members
 public:
+  int floor;
   // initialize with id and # of floors;
   // initilize state, dir, and buttons
   Car(int i, int f);
@@ -36,7 +37,9 @@ public:
   // this is where all the logic goes...
   // void update(vector<Floor> &, int, vector<Person> &);
   // it is important to get these functions right...
-  // void embark(Floor & floor, int iter);
+  // void embark(Floor & floor, int iter) {
+    // p.setEmbarkTime(iter);
+  // }
   // void disembark(Floor floor, int iter, vector<Person> & allpersons);
 };
 

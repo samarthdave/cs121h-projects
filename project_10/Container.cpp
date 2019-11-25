@@ -1,29 +1,31 @@
 #include <vector>
 #include <algorithm>
 
+#include "Container.hpp"
 #include "Person.hpp"
 
 using namespace std;
 
-bool Container::Press(int f) {
+void Container::Press(int f) {
   // set selected floor to true
-
+  this->buttons[f] = true;
 }
 
-bool Pressed(int f) {
+bool Container::Pressed(int f) {
   // returning the current value
+  return this->buttons[f];
 }
 
-void Reset(int f) {
+void Container::Reset(int f) {
   // set pressed to 0 or false
   buttons[f] = false;
 }
 
-Container::AddPerson(Person p) {
-  persons.push_back(p):
+void Container::AddPerson(Person p) {
+  this->persons.push_back(p);
 }
 
-void RemovePerson(Person p) {
+void Container::RemovePerson(Person p) {
   // search thru vector
   // int foundLoc = -1;
   // for (int i = 0; i < persons.size(); i++) {
@@ -50,10 +52,3 @@ void RemovePerson(Person p) {
 
   // find index, & remove it
 }
-
-
-class Container {
-public:
-  // void AddPerson(Person p);
-  // void RemovePerson(Person p);
-};

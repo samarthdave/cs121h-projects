@@ -3,11 +3,14 @@ F1 = --std=c++11
 
 all: elevator move
 
-elevator: main.o Building.o Floor.o Car.o Person.o
-	$(CC) $(F1) -o elevator main.o Building.o Floor.o Car.o Person.o
+elevator: main.o Container.o Building.o Floor.o Car.o Person.o
+	$(CC) $(F1) -o elevator main.o Container.o Building.o Floor.o Car.o Person.o
 
 main.o: main.cpp Building.hpp
 	$(CC) $(F1) -c main.cpp
+
+Container.o: Container.cpp Container.hpp
+	$(CC) $(F1) -c Container.cpp
 
 Building.o: Building.cpp Building.hpp
 	$(CC) $(F1) -c Building.cpp
