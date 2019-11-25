@@ -25,11 +25,16 @@ Person.o: Person.cpp Person.hpp
 	$(CC) $(F1) -c Person.cpp
 
 move:
+	@echo "--------------------------"
+	@echo "Moving files from working"
+	@echo "directory to ./build/"
+	@echo "--------------------------"
 	mkdir -p build
 	mv *.o ./build
 	mv elevator ./build
 	@echo "--------------------------"
 	@echo 'type "make run" to execute'
+	@echo "or use './build/elevator'"
 	@echo "--------------------------"
 
 run:

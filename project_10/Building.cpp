@@ -14,6 +14,7 @@ Building::Building(int numiters, int numfloors, int numcars, string fname) {
   this->ncars = numcars;
   this->nfloors = numfloors;
   this->ITERS = numiters;
+  // this->journeys
 
   // push nfloors Floor classes into this->floors
   for (int i = 0; i < numfloors; i++) {
@@ -63,21 +64,10 @@ void Building::readin_traffic(string &fname) {
     } // error
 
     // person info
-    cout << id << " | " << timeIndex << " | " << src << " | " << dest << endl;
-    // Person p(id, timeIndex, src, dest);
-    // add ppl to the floors
-    // from the src
-    // floors[src].push_back(p);
+    // cout << id << " | " << timeIndex << " | " << src << " | " << dest << endl;
+    Person p(id, timeIndex, src, dest);
+    persons.push_back(p);
   }
-}
-
-// 
-void Building::summary() {
-  cout << "Printing summary of building" << endl;
-  cout << "num cars: " << this->ncars << endl;
-  cout << "floors  : " << this->nfloors << endl;
-  cout << "iters   : " << this->ITERS << endl;
-  cout << string(20, '-') << endl;
 }
 
 // called from main
@@ -90,29 +80,50 @@ void Building::run() {
     NewArrivals(iter);
 
     // print out contents of floors and cars
-    // for (int i = 0; i < nfloors; i++) {
-    //   int f = nfloors - i - 1;
-    //   cout << floors[f].toString();
-    //   for (int j = 0; j < C; j++)
-    //     if (cars[j].floor == f) cars[j].printSymbolic();
-    //   cout << endl;
-    // }
-    // for (int i = 0; i < C; i++) cout << cars[i].toString() << endl;
+    for (int i = 0; i < nfloors; i++) {
+      int f = nfloors - i - 1;
+      cout << floors[f].toString();
+      for (int j = 0; j < C; j++) // prints car status (ex. CAR0[3]^)
+        if (cars[j].floor == f) cars[j].printSymbolic();
+      cout << endl;
+    }
+    // print out car state (floor, count)
+    for (int i = 0; i < C; i++) cout << cars[i].toString() << endl;
+    cout << string(20, '-') << endl;
 
-    // update cars...
-    // for (int i = 0; i < C; i++) cars[i].update(floors, iter, persons);
+    // update cars
+    for (int i = 0; i < C; i++) cars[i].update(floors, iter, persons);
   } // end iters loop
+
+  // this->summary();
 }
 
 // check for person whose start time has arrived
 void Building::NewArrivals(int &iter) {
-  for (int i = 0; i < persons.size(); i++) {
-    if (persons[i].start == iter) {
-      cout << "new person " << persons[i].id << " arriving on floor ";
-      cout << persons[i].src << ", dest=" << persons[i].dest << endl;
+  // for (int i = 0; i < persons.size(); i++)
+  // b/c ^^ is too much work...
+  for (auto p: persons) {
+    if (p.start == iter) {
+      cout << "new person " << p.id << " arriving on floor ";
+      cout << p.src << ", dest=" << p.dest << endl;
+      // push it to vector for all persons
+      pair<int,int> journey = make_pair(p.src, p.dest);
+      journeys.push_back(journey);
     }
   }
 }
 
-// void Building::AddPerson(Person p);
+// void Building::AddPerson(Person p) {
+
+// }
 // void Building::RemovePerson(Person p);
+
+// 
+void Building::summary() {
+  cout << string(20, '-') << endl;
+  cout << "Printing summary of building" << endl;
+  cout << "num cars: " << this->ncars << endl;
+  cout << "floors  : " << this->nfloors << endl;
+  cout << "iters   : " << this->ITERS << endl;
+  cout << string(20, '-') << endl;
+}

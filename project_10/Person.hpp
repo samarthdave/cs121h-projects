@@ -16,7 +16,8 @@ public:
   int src; // source floor
   int dest; // destination floor
   int embarkTime; // boarding car
-  int arriveTime; // arriving at destination flloor
+  int arriveTime; // arriving at destination floor
+  bool journeyComplete; // default = false
 // (more) public members
   Person(int, int, int, int); // constuctor: pass-in id, time, src, dest
   bool operator==(const Person &); // based on id, to check if 2 persons are same

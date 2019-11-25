@@ -14,10 +14,9 @@ Floor::Floor(int i) {
   buttons.push_back(false);
 }
 
+// eg. "FLOOR 1, persons 0, up 0, down 0"
 string Floor::toString() {
   stringstream ss;
-  // FLOOR 1, persons 0, up 0, down 0
-  // add floor #
   ss << "FLOOR " << id << ", ";
 
   // need to access parent
@@ -32,6 +31,9 @@ string Floor::toString() {
   return ss.str();
 }
 
+// accessor member
+int Floor::getID() { return this->id; }
+
 // is it pressed? and press
 bool Floor::UpPressed() {
   return this->buttons[1];
@@ -44,7 +46,6 @@ void Floor::PressUp() {
 bool Floor::DownPressed() {
   return this->buttons[0];
 }
-
 void Floor::PressDown() {
   this->Press(0);
 }

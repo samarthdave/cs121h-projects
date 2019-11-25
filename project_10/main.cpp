@@ -21,7 +21,7 @@ int main(int argc, char ** argv) {
   int timesteps = 100;
   int floors = 5;
   int cars = 1;
-  string filename = "tests/traffic_5_100_0.2.txt";
+  string filename = "tests/traffic_5_100_0.5.txt";
 
   Building b = Building(timesteps, floors, cars, filename);
 

@@ -16,6 +16,7 @@ class Floor : public Container {
 // public members
 public:
   Floor(int i); // pass-in id; initialize 2 buttons to false
+  int getID();
   bool UpPressed();
   bool DownPressed();
   void PressUp();

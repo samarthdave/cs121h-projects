@@ -10,6 +10,7 @@ using namespace std;
 
 class Car : public Container {
 // private members
+private:
   enum State {
     IDLE,
     MOVING,
@@ -35,12 +36,11 @@ public:
   string toString();
   void printSymbolic(); // print something like "CAR0[3]^"
   // this is where all the logic goes...
-  // void update(vector<Floor> &, int, vector<Person> &);
+  void update(vector<Floor> &floors, int iter, vector<Person> &allPersons);
   // it is important to get these functions right...
-  // void embark(Floor & floor, int iter) {
-    // p.setEmbarkTime(iter);
-  // }
-  // void disembark(Floor floor, int iter, vector<Person> & allpersons);
+  void embark(Floor &floor, int iter, vector<Person> &allPersons);
+  void disembark(Floor &floor, int iter, vector<Person> &allPersons);
+  static bool withinRange(int floor, int move, int nfloors);
 };
 
 #endif // guard for Car

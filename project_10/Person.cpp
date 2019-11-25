@@ -21,6 +21,10 @@ Person::Person(int i, int Time, int s, int d) {
   this->start = Time;
   this->src = s;
   this->dest = d;
+  // not passed in:
+  this->embarkTime = -1;
+  this->arriveTime = -1;
+  this->journeyComplete = false;
 }
 
 // are 2 objects the same (based on id?)
@@ -45,12 +49,13 @@ string Person::toString() {
   // when elevator dropped them off
   ss << " arrived " << setw(3) << arriveTime;
   // ARRIVED - is the person still on the elevator when simulation ends?
-  // if person still on elevator then print
-    // then print arrived -1
-  // ss << " PLACEHOLDER ";
-
-  // if (finishedTrip)
-  //   ss << " travelTime " << setw(3) << (arriveTime - start);
+  if (!journeyComplete) {
+    // waiting in elevator or in a car
+    if (this->embarkTime != -1) // journey started
+      ss << " still on car";
+  } else { // if successful travel from src --> dest
+    ss << " travelTime " << setw(3) << (arriveTime - start);
+  }
 
   return ss.str();
 }
@@ -64,5 +69,6 @@ void Person::setEmbarkTime(int x) {
 }
 
 void Person::setArriveTime(int x) {
+  this->journeyComplete = true;
   this->arriveTime = x;
 }

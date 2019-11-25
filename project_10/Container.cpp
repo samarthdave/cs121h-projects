@@ -18,7 +18,7 @@ bool Container::Pressed(int f) {
 
 void Container::Reset(int f) {
   // set pressed to 0 or false
-  buttons[f] = false;
+  this->buttons[f] = false;
 }
 
 void Container::AddPerson(Person p) {

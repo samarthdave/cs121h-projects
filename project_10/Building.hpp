@@ -20,6 +20,8 @@ private:
   vector<Floor> floors;
   vector<Car> cars;
   vector<Person> persons;
+  // store start and end locations
+  vector< pair<int, int> > journeys;
 
 // public members
 public:
