@@ -6,12 +6,32 @@
 using namespace std;
 
 Floor::Floor(int i) {
-  cout << "[FLOOR]: " << i << endl;
   this->id = i;
 
   // down & up button are false
   buttons.push_back(false);
   buttons.push_back(false);
+}
+
+vector<Person> Floor::filter(Dir dir) {
+  vector<Person> ppl;
+  for (auto p2: persons) {
+    if (p2.dir() == dir) {
+      ppl.push_back(p2);
+    }
+  }
+  return ppl;
+}
+
+void Floor::AddPerson(Person p) {
+  persons.push_back(p);
+  if (p.src > p.dest) {
+    PressDown();
+  } else {
+    PressUp();
+  }
+  cout << "new person " << p.id << " arriving on floor " << id;
+  cout << ", dest=" << p.dest << endl;
 }
 
 // eg. "FLOOR 1, persons 0, up 0, down 0"
@@ -31,29 +51,34 @@ string Floor::toString() {
   return ss.str();
 }
 
-// accessor member
-int Floor::getID() { return this->id; }
+// from run()
+void Floor::summary() {
+  for (auto p: persons) {
+    cout << "on floor " << id << ": ";
+    p.print();
+  }
+}
 
 // is it pressed? and press
 bool Floor::UpPressed() {
-  return this->buttons[1];
+  return Pressed(0);
 }
 void Floor::PressUp() {
-  this->Press(1);
+  Press(0);
 }
 
 // is it pressed? and press
 bool Floor::DownPressed() {
-  return this->buttons[0];
+  return Pressed(1);
 }
 void Floor::PressDown() {
-  this->Press(0);
+  Press(1);
 }
 
 // remove press
 void Floor::ClearUp() {
-  this->Reset(1);
+  Reset(0);
 }
 void Floor::ClearDown() {
-  this->Reset(0);
+  Reset(1);
 }

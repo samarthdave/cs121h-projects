@@ -21,18 +21,16 @@ Building::Building(int numiters, int numfloors, int numcars, string fname) {
     Floor f_temp(i);
     this->floors.push_back(f_temp);
   }
-
   // make the cars
   for (int i = 0; i < numcars; i++) {
     Car car_item(i, numfloors);
     this->cars.push_back(car_item);
   }
-
   // read in method
   this->readin_traffic(fname);
 }
 
-
+// read in file & make Person instances from it
 void Building::readin_traffic(string &fname) {
   // check if valid file
   fstream file;
@@ -64,7 +62,6 @@ void Building::readin_traffic(string &fname) {
     } // error
 
     // person info
-    // cout << id << " | " << timeIndex << " | " << src << " | " << dest << endl;
     Person p(id, timeIndex, src, dest);
     persons.push_back(p);
   }
@@ -95,7 +92,7 @@ void Building::run() {
     for (int i = 0; i < C; i++) cars[i].update(floors, iter, persons);
   } // end iters loop
 
-  // this->summary();
+  this->summary();
 }
 
 // check for person whose start time has arrived
@@ -117,11 +114,24 @@ void Building::RemovePerson(Person p) {
   persons.erase(find(persons.begin(), persons.end(), p));
 }
 
+bool compare_func(const Person &p, const Person &q) {
+  return p < q;
+};
+
 void Building::summary() {
+  // build a lambda compare function for sorting
+  sort(persons.begin(), persons.end(), compare_func);
   cout << string(20, '-') << endl;
-  cout << "Printing summary of building" << endl;
-  cout << "num cars: " << this->ncars << endl;
-  cout << "floors  : " << this->nfloors << endl;
-  cout << "iters   : " << this->ITERS << endl;
+  cout << "SUMMARY" << endl;
+  // print summary of all components
+  for (auto floor : floors) {
+    floor.summary();
+  }
+  for (auto car: cars) {
+    car.summary();
+  }
+  for(auto person: persons) {
+    person.print();
+  }
   cout << string(20, '-') << endl;
 }

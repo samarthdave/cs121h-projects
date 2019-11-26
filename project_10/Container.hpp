@@ -18,8 +18,9 @@ public:
   void Press(int f);
   bool Pressed(int f);
   void Reset(int f);
-  void AddPerson(Person p);
+  virtual void AddPerson(Person p);
   void RemovePerson(Person p);
+  virtual void summary();
 };
 
 #endif // guard for Container

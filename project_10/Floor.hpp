@@ -11,19 +11,20 @@ using namespace std;
 #define _Floor_hpp
 
 class Floor : public Container {
-// private members
-  int id;
 // public members
 public:
+  int id; // converted to public member
   Floor(int i); // pass-in id; initialize 2 buttons to false
-  int getID();
+  void AddPerson(Person p);
   bool UpPressed();
   bool DownPressed();
   void PressUp();
   void PressDown();
   void ClearUp();
   void ClearDown();
+  vector<Person> filter(Dir); // filter and return a copy
   string toString();
+  void summary();
 };
 
 #endif // guard for Floor

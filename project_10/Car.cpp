@@ -1,5 +1,6 @@
 #include <vector>
 #include <sstream>
+#include <iomanip>
 
 #include "Car.hpp"
 
@@ -8,15 +9,16 @@ using namespace std;
 // Constructor for Car
 // initialize with id and # of floors
 Car::Car(int i, int f) {
-  cout << "car constructor: " << i << " and " << f << endl;
-  this->id = i;
-  this->floor = 0; // starts at the ground level
-  this->nfloors = f;
+  id = i;
+  floor = 0; // starts at the ground level
+  nfloors = f;
+  capacity = 10;
   // initialize w/ state, dir & buttons
-  this->state = Car::IDLE;
-  this->dir = UP; // 0 is down, 1 is up (Person.hpp)
-  this->buttons.push_back(0);
-  this->buttons.push_back(0);
+  state = Car::IDLE;
+  dir = UP; // 0 is down, 1 is up (Person.hpp)
+  for (int i = 0; i < nfloors; i++) {
+    buttons.push_back(false);
+  }
 }
 
 // static member (is the next move within bounds of building?)
@@ -29,72 +31,115 @@ string Car::toString() {
   // CAR 0, floor 1, load 0, state 1, dir 1, buttonsPressed: 
   stringstream ss;
 
-  ss << "CAR " << (this->id) << ", " << " floor " << (this->floor);
-  ss << ", load " << (this->persons.size());
-  ss << ", state " << (this->state);
-  ss << ", dir " << (this->dir);
+  ss << "CAR " << id << ", " << " floor " << floor;
+  ss << ", load " << persons.size();
+  ss << ", state " << state;
+  ss << ", dir " << dir;
 
-  string buttonOutput = "";
-  for (int i = 0; i < this->buttons.size(); i++) {
-    buttonOutput += ((this->buttons[i]) ? to_string(i) : "");
+  ss << ", buttonsPressed: ";
+  for (int i = 0; i < nfloors; i++) {
+    if (buttons[i])
+      ss << i << " ";
   }
-  ss << ", buttonsPressed: " << buttonOutput;
 
   return ss.str();
 }
 
 // printSymbolic returns car information (eg. "CAR0[3]^")
-// car num + floor + direction
 void Car::printSymbolic() {
   stringstream ss;
   // car number
   int personCount = this->persons.size();
   ss << "CAR" << (this->id) << "[" << personCount << "]";
   // car direction
-  // check state and add direction if needed
-  switch (this->state) {
-    case Car::MOVING:
-      // 0 is down, 1 is up
-      ss << ((this->dir == 0) ? "v" : "^" );
-      break;
-    case Car::IDLE:
-      // hit default case
-      // ss << "*";
-    default:
-      ss << "*";
-      break;
+  char token = '*';
+  if (state == MOVING) {
+    if (dir == UP) { token = '^'; }
+    else { token = 'v'; }
   }
-
+  ss << token;
   cout << " " << ss.str();
 }
 
-// the most difficult part of this lab
-// does everything...
-void Car::update(vector<Floor> &floors, int iter, vector<Person> &allpersons) {
-  // todo:
-  // [x] move elevator passively up when up
-  // [ ] move car up & down
-  // default direction
-  int moveDirection = 1;
-  
-
-  // update state for direction
-  if (moveDirection != 0) {
-    this->state = MOVING;
+void Car::update(vector<Floor> &f4, int iter, vector<Person> &allPersons) {
+  if (floor == nfloors - 1){
+    dir = DOWN;
   }
-//   add a +/- direction
-  if (withinRange(this->floor, moveDirection, this->nfloors))
-    this->floor += moveDirection;
-  else
-    this->state = IDLE;
-}
+  if (floor == 0) {
+    dir = UP;
+  }
+  bool load = false;
+  bool unload = buttons[floor];
 
-void Car::embark(Floor &floor, int iter, vector<Person> &allPersons) {
-  // loop thru allPersons and if it hit their floor, pick them up
-  for (auto p: allPersons) {
-    if (p.src == floor.getID()) {
-      cout << "on your floor" << endl;
+  if (dir == UP && f4[floor].UpPressed()) {
+    load = true;
+  }
+  if (dir == DOWN && f4[floor].DownPressed()) {
+    load = true;
+  }
+  int moveDirection = 0;
+  // set direction for push size
+  if (dir == UP) moveDirection = 1;
+  else moveDirection = -1;
+  
+  if (!(unload || load)) {
+    state = MOVING;
+    if (withinRange(this->floor, moveDirection, this->nfloors))
+      this->floor += moveDirection;
+  } else {
+    if (unload) {
+      state = UNLOADING;
+      disembark(f4[floor], iter, allPersons);
+    }
+    if (load) {
+      state = LOADING;
+      embark(f4[floor], iter);
     }
   }
 }
-// void Car::disembark(Floor &floor, int iter, vector<Person> &allPersons)
+
+// put ppl onto the elevator car
+void Car::embark(Floor &f2, int iter) {
+  vector<Person> load;
+  if (dir == UP) {
+    load = f2.filter(UP); // user filter method for specific Dir
+    f2.ClearUp();
+  } else {
+    load = f2.filter(DOWN);
+    f2.ClearDown();
+  }
+
+  for (auto p4: load) {
+    f2.RemovePerson(p4);
+    p4.setEmbarkTime(iter);
+    AddPerson(p4);
+    Press(p4.dest);
+    // pretty print
+    cout << "Person " << setw(2) << p4.id << " embarking from floor ";
+    cout << setw(2) << floor << " to car " << id << endl;
+  }
+}
+
+// remove ppl from the elevator
+void Car::disembark(Floor f3, int iter, vector<Person> &allPersons) {
+  Reset(floor);
+  for (vector<Person>::iterator i1 = persons.begin(); i1 != persons.end(); i1++) {
+    if (i1->dest == floor) {
+      cout << "Person " << setw(2) << i1->id << " disembarking from car ";
+      cout << setw(2) << id << " to floor " << setw(2) << floor;
+      cout << " time " << iter << endl;
+
+      i1->setArriveTime(iter);
+      allPersons.push_back(*i1);
+      persons.erase(i1);
+      i1--;
+    }
+  }
+}
+
+void Car::summary() {
+  for (auto p5: persons) {
+    cout << "in car " << id << ": ";
+    p5.print();
+  }
+}
