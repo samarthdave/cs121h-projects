@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <algorithm> // find
 
 #include "Building.hpp"
 #include "Person.hpp"
@@ -14,7 +15,6 @@ Building::Building(int numiters, int numfloors, int numcars, string fname) {
   this->ncars = numcars;
   this->nfloors = numfloors;
   this->ITERS = numiters;
-  // this->journeys
 
   // push nfloors Floor classes into this->floors
   for (int i = 0; i < numfloors; i++) {
@@ -99,26 +99,24 @@ void Building::run() {
 }
 
 // check for person whose start time has arrived
-void Building::NewArrivals(int &iter) {
-  // for (int i = 0; i < persons.size(); i++)
-  // b/c ^^ is too much work...
-  for (auto p: persons) {
-    if (p.start == iter) {
-      cout << "new person " << p.id << " arriving on floor ";
-      cout << p.src << ", dest=" << p.dest << endl;
-      // push it to vector for all persons
-      pair<int,int> journey = make_pair(p.src, p.dest);
-      journeys.push_back(journey);
+void Building::NewArrivals(int iter) {
+  for (vector<Person>::iterator p1 = persons.begin(); p1 != persons.end(); p1++) {
+    if (p1->start == iter) {
+      floors[p1->src].AddPerson(*p1);
+      persons.erase(p1);
+      p1--;
     }
   }
 }
 
-// void Building::AddPerson(Person p) {
+// add/remove persons
+void Building::AddPerson(Person p) {
+  persons.push_back(p);
+}
+void Building::RemovePerson(Person p) {
+  persons.erase(find(persons.begin(), persons.end(), p));
+}
 
-// }
-// void Building::RemovePerson(Person p);
-
-// 
 void Building::summary() {
   cout << string(20, '-') << endl;
   cout << "Printing summary of building" << endl;

@@ -17,11 +17,10 @@ public:
   int dest; // destination floor
   int embarkTime; // boarding car
   int arriveTime; // arriving at destination floor
-  bool journeyComplete; // default = false
 // (more) public members
-  Person(int, int, int, int); // constuctor: pass-in id, time, src, dest
-  bool operator==(const Person &); // based on id, to check if 2 persons are same
-  bool operator<(const Person &); // based on start time, for sorting
+  Person(int i, int Time, int src, int dest);
+  bool operator==(const Person &p); // based on id, to check if 2 persons are same
+  bool operator<(const Person &) const; // based on start time, for sorting
   void setEmbarkTime(int x);
   void setArriveTime(int x);
   Dir dir(); // what direction are they travelling?

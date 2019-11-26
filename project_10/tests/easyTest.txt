@@ -1,0 +1,5 @@
+floors 5 iters 10
+PERSON id 7 time 9 src 3 dest 2
+PERSON id 8 time 0 src 1 dest 0
+PERSON id 13 time 6 src 0 dest 1
+PERSON id 18 time 5 src 0 dest 3

@@ -14,14 +14,10 @@ int main(int argc, char ** argv) {
   }
 
   // read file in
-  // int timesteps = stoi(argv[1]);
-  // int floors = stoi(argv[2]);
-  // int cars = stoi(argv[3]);
-  // string filename = argv[4];
-  int timesteps = 100;
-  int floors = 5;
-  int cars = 1;
-  string filename = "tests/traffic_5_100_0.5.txt";
+  int timesteps = stoi(argv[1]);
+  int floors = stoi(argv[2]);
+  int cars = stoi(argv[3]);
+  string filename = argv[4];
 
   Building b = Building(timesteps, floors, cars, filename);
 

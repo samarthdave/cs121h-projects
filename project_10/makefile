@@ -38,7 +38,7 @@ move:
 	@echo "--------------------------"
 
 run:
-	./build/elevator
+	./build/elevator 10 5 1 tests/easyTest.txt
 
 # phony assumes the file is always out of date
 .PHONY: clean

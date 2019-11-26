@@ -20,16 +20,14 @@ private:
   vector<Floor> floors;
   vector<Car> cars;
   vector<Person> persons;
-  // store start and end locations
-  vector< pair<int, int> > journeys;
 
 // public members
 public:
   Building(int numiters, int numfloors, int numcars, string fname);
-  void AddPerson(Person &);
-  void RemovePerson(Person &);
+  void AddPerson(Person);
+  void RemovePerson(Person);
   void readin_traffic(string &);
-  void NewArrivals(int &); // check for person whose start time has arrived
+  void NewArrivals(int); // check for person whose start time has arrived
   void summary(); // print-out all persons, cars, and floors at end
   void run();
 };
