@@ -1,77 +1,58 @@
-# cs121h-projects
+# CS121 Projects
 My projects/submissions for CSCE 121 H
 
-## Some inspiration
 > Live as if you were to die tomorrow. Learn as if you were to live forever.
 
-## Projects overview (ordered most recent to least)
+--------------------------------------
+
+## Overview :helicopter: (ordered most recent :watch:)
 
 Look at each project's README for more information.
 
-#### [Project 10 - Elevator](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project10.txt)
+### :hotel: [Project 10 - Elevator](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project10.txt)
 - event driven programming
 - iterators, classes, enum
 
-#### [Project 9 - Keywords](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project9.txt)
-- hash tables/unordered maps
+### :books: [Project 9 - Keywords](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project9.txt)
+- create a "word cloud"
 - read in file(s) & analyze word frequency against collection
 
-#### [Project 8 - Matrix](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project8.txt)
-- learn classes with Matrix operations
-- Data Science application
+### :black_square_button: [Project 8 - Matrix](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project8.txt)
+- implement a matrix class
+- :hibiscus: Data Science application (Iris)
 
-#### [Project 7 - Polynomials](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project7.txt)
-- Read user input of text and perform operations on polynomials
+### :heavy_division_sign: [Project 7 - Polynomials](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project7.txt)
+Read user input of text and perform operations on polynomials
 
-#### [Project 6 - Cities](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project6.txt)
-- Calculate the approximate distance between 2 points in Texas
+### :city_sunrise: [Project 6 - Cities](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project6.txt)
+Calculate the approximate distance between 2 points in Texas
 
-#### [Project 5: Genomics](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project5.txt)
+### :family: [Project 5: Genomics](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project5.txt)
 Analyze DNA from *.fasta file, protein table, amino acid sequences
 
-#### [Project 4: Newton-Raphson, Subsets](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project4.txt)
-...calculate the square root of a float given on the comand line...
+### :chart_with_upwards_trend: [Project 4: Newton-Raphson, Subsets](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project4.txt)
+calculate the square root of a float given on the comand line, generate subsets
 
-#### [Project 3: Vending Machine](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project3.txt)
-- Build a vending machine
-- interactive program with user input
+### :chocolate_bar: [Project 3: Vending Machine](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project3.txt)
+Build a vending machine that is interactive program with user input
 ```
----------------------
-CSCE 121H - Fall 2019
-Project 3 - Vending Machine
-due: Fri, 10/4/19, 8:00am
----------------------
-
 Write a simulation of a vending machine.  This will be an interactive
-program, where the user will enter commands on the console.  For
-example, the user could enter several coins, and then select an item by
-saying 'press', like this:
-
-  > vending
-  quarter       // user input
-  balance: 0.25 // response printed out
-
-  nickel        // input
-  balance: 0.30 // response
-
-  quarter quarter dime // put in several coins on one line
-  balance: 0.90 
-
-  press coke
-
+program, where the user will enter commands on the console...
 ...
 ```
 
-#### [Project 1: Calendar](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project1.txt)
+### :bar_chart: [Project 2: ASCII Histogram](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project2.txt)
+- take in a data file and display asterisks for a plot with 20 bins
+```
+Write a C++ program that reads a list of numbers in from a file,
+prints out some statistics (count, range, mean, standard deviation),
+and then prints a histogram of the values in ASCII...
+```
+
+#### :calendar: [Project 1: Calendar](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project1.txt)
 - Build a "cal" (unix native program) ASCII in C++
 - flag certain dates (Independence Day, Halloween, Christmas)
 ```
----------------------
-CSCE 121H - Fall 2019
-Project 1 - Calendar
-due: Fri, 9/20/2019, 8:00 am
----------------------
-
 Write a C++ program that takes the month (1-12) and year on the command-line,
 and prints out a format calendar (in ASCII) for that month.
 
