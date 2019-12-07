@@ -59,3 +59,6 @@ and prints out a format calendar (in ASCII) for that month.
 Read the month and year as command-line args.
 ...
 ```
+
+##### Misc:
+- (Change author for all commits)[https://stackoverflow.com/questions/2919878/git-rewrite-previous-commit-usernames-and-emails/54356138#54356138]
