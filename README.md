@@ -49,7 +49,7 @@ prints out some statistics (count, range, mean, standard deviation),
 and then prints a histogram of the values in ASCII...
 ```
 
-#### :calendar: [Project 1: Calendar](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project1.txt)
+### :calendar: [Project 1: Calendar](http://faculty.cse.tamu.edu/ioerger/cs121h-fall19/Project1.txt)
 - Build a "cal" (unix native program) ASCII in C++
 - flag certain dates (Independence Day, Halloween, Christmas)
 ```
