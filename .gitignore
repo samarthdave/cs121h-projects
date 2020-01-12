@@ -8,9 +8,10 @@
 !makefile
 !Makefile
 
-# also object files that are compiled with make files
+# include manually compiled object files (or gen. w/ makefiles)
 *.o
 *.out
+*.exe
 
 # should probably have included the prot & fasta files from the start
 *.fasta

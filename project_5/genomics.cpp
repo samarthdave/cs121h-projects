@@ -79,8 +79,8 @@ int main(int argc, char *argv[]) {
   }
 }
 
-// Info (a struct with data that ensures I don't have to use global variables or something...)
-// READ in file (filename) and push to allBasePairs
+// Info (a struct with data so I don't have to use global variables)
+// READ in file and push to allBasePairs
 Info readGenomeFromFile(string &filename, string &allBasePairs) {
   Info returnMe;
   string FASTA_EXTENSION = ".fasta";

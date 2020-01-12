@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
   ifstream infile(fileName);
 
   if (!infile.is_open()) {
-    cout << "ERROR: Could not load you file with name: \"" << fileName << "\"" << endl;
+    cerr << "ERROR: Could not load file named: \"" << fileName << "\"" << endl;
     return 0;
   }
 

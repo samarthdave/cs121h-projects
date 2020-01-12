@@ -170,7 +170,7 @@ void extractTable(vector< pair<string, int> > &collection,
 // map<...> extractHashFromDoc(string fname)
 // ----- takes in file, inserts word occurence into map
 // -----------------------------------
-unordered_map<string, int> extractHashFromDoc(string &filename, int &count) {
+unordered_map <string, int> extractHashFromDoc(string &filename, int &count) {
   // read in the file
   fstream file;
   file.open(filename);
