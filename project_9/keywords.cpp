@@ -10,6 +10,18 @@
 
 using namespace std;
 
+// elevate the Row in sequence for access in main
+// for operations & to manage each row
+struct Row {
+  string word;
+  int numDoc;
+  double freqDoc;
+  int numAll;
+  double freqAll;
+  double expected;
+  float ratio;
+};
+
 // ----------
 // prototypes
 // ----------
@@ -18,9 +30,10 @@ int get_second( pair<string, int> i ) { return i.second; }
 // read, analyze text files
 void printSimple(vector< pair<string,int> > &);
 void sortVector(vector< pair<string, int> > &);
-void extractTable(vector< pair<string, int> > &, vector< pair<string, int> > &, int, int);
+vector<Row> extractTable(vector< pair<string, int> > &, vector< pair<string, int> > &, int, int);
 unordered_map<string, int> extractHashFromDoc(string &, int &);
 vector< pair<string, int> > buildVector(unordered_map<string, int> &);
+void createCSVFromData(vector<Row>&, string);
 
 // string manipulation
 string trim(const string &);
@@ -28,15 +41,22 @@ string lowercase(string);
 
 // global: max output from cli, change using --max flag
 int MAX_WORDS = 20;
+string GLOBAL_OUTPUT = "";
 
 int main(int argc, const char** argv) {
   cout << "------------------------" << endl;
   cout << "         Keywords       " << endl;
   cout << "------------------------" << endl;
 
+  // ---------------------------
+  // what (I belive) is intelligent removal of flags
+  // this code prevents flags (and their next values)
+  // from going into the "args" vector
+  // ---------------------------
   vector<string> args;
   // get arguments and parse for flags
-  for (int i = 0; i < argc; i++) {
+  int i = 0;
+  while (i < argc) {
     // show command line args
     printf("Argument i=%d : %s\n", i, argv[i]);
 
@@ -46,12 +66,24 @@ int main(int argc, const char** argv) {
       i += 1;
       continue;
     }
+
+    // check if flag is output file (export to csv file)
+    if (lowercase(argv[i]) == "--output" && (i+1) < argc) {
+      // set global value (not the best design but it'll do)
+      GLOBAL_OUTPUT = argv[i+1]; // skip the current on (thus +2 instead of 1)
+      i += 2;
+      continue;
+    }
     
     // if not a flag, push
     args.push_back(argv[i]);
+
+    i += 1;
   }
+
   
   int argCount = args.size();
+  for (int i = 0; i < argCount; i++) cout << argv[i] << endl;
   if (argCount < 2 || argCount > 3) {
     cerr << "Error: Invalid number of arguments provided." << endl;
     cerr << "Usage: \"./keywords FILE1\" or \"./keywords FILE1 FILE2\"" << endl;
@@ -66,6 +98,8 @@ int main(int argc, const char** argv) {
   int total2 = 0; // will be passed by ref.
   string filename1 = "";
 
+  // not sure what this does but this comment is here
+  // so that I can pretend I do
   if (argCount >= 2) {
     filename1 = args[1];
     cout << "Reading file: " << filename1 << endl;
@@ -92,24 +126,18 @@ int main(int argc, const char** argv) {
     sortVector(vec2);
 
     // build & print large table
-    extractTable(vec1, vec2, total1, total2);
+    vector<Row> rows = extractTable(vec1, vec2, total1, total2);
+
+    // create csv & fill with content (will mirror "extractTable")
+    if (GLOBAL_OUTPUT != "")
+      createCSVFromData(rows, GLOBAL_OUTPUT);
   }
 
   return 0;
 }
 
-struct Row {
-  string word;
-  int numDoc;
-  double freqDoc;
-  int numAll;
-  double freqAll;
-  double expected;
-  float ratio;
-};
-
 // 2 arguments for files
-void extractTable(vector< pair<string, int> > &collection,
+vector<Row> extractTable(vector< pair<string, int> > &collection,
                   vector< pair<string, int> > &document,
                   int collectionWordCount, int documentWordCount) {
   // fill vector with values, then sort based on enrichment
@@ -164,6 +192,25 @@ void extractTable(vector< pair<string, int> > &collection,
       break;
     }
   }
+
+  // honor return and use for pushing to csv file
+  return tableItems;
+}
+
+// create a csv file if not exists & import vector
+void createCSVFromData(vector<Row> &v, string fName) {
+  ofstream outfile(fName);
+
+  outfile << "WORD,num(doc),freq(doc),num(all),freq(all),expected,ratio\n";
+  for (auto row : v) {
+    outfile << row.word.c_str() << "," << row.numDoc << "," << row.freqDoc << ",";
+    outfile << row.numAll << "," << row.freqAll << "," << row.expected << ",";
+    outfile << row.ratio << "\n";
+  }
+
+  outfile << endl;
+
+  outfile.close();
 }
 
 // -----------------------------------

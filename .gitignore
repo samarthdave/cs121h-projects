@@ -29,3 +29,6 @@ build/*
 # project 9:
 # ignore all the text files
 /project_9/docs/*
+
+# project 9 stuff
+*.csv
