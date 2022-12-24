@@ -1,0 +1,1002 @@
+> elevator 100 5 1 traffic_5_100_0.5.txt
+
+iter=0
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[0]*
+CAR 0, floor 0, load 0, state 0, dir 1, buttonsPressed: 
+
+iter=1
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[0]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 0, state 1, dir 1, buttonsPressed: 
+
+iter=2
+new person 17 arriving on floor 0, dest=3
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[0]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 0, state 1, dir 1, buttonsPressed: 
+
+iter=3
+new person 30 arriving on floor 4, dest=3
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0 CAR0[0]^
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 0, state 1, dir 1, buttonsPressed: 
+
+iter=4
+new person 2 arriving on floor 4, dest=2
+FLOOR 4, persons 2, up 0, down 1 CAR0[0]^
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 0, state 1, dir 1, buttonsPressed: 
+Person 30 embarking from floor 4 to car 0
+Person 2 embarking from floor 4 to car 0
+
+iter=5
+new person 20 arriving on floor 1, dest=3
+FLOOR 4, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 2, state 6, dir 0, buttonsPressed: 2 3 
+
+iter=6
+new person 40 arriving on floor 0, dest=3
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[2]v
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 3, load 2, state 1, dir 0, buttonsPressed: 2 3 
+Person 30 disembarking from car 0 to floor 3 time 6
+
+iter=7
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[1]*
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 3, load 1, state 6, dir 0, buttonsPressed: 2 
+
+iter=8
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[1]v
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 2, load 1, state 1, dir 0, buttonsPressed: 2 
+Person 2 disembarking from car 0 to floor 2 time 8
+
+iter=9
+new person 10 arriving on floor 3, dest=0
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0 CAR0[0]*
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 2, load 0, state 6, dir 0, buttonsPressed: 
+
+iter=10
+new person 4 arriving on floor 3, dest=2
+new person 13 arriving on floor 4, dest=1
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0 CAR0[0]v
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 1, load 0, state 1, dir 0, buttonsPressed: 
+
+iter=11
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0 CAR0[0]v
+CAR 0, floor 0, load 0, state 1, dir 0, buttonsPressed: 
+Person 17 embarking from floor 0 to car 0
+Person 40 embarking from floor 0 to car 0
+
+iter=12
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[2]*
+CAR 0, floor 0, load 2, state 6, dir 1, buttonsPressed: 3 
+
+iter=13
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0 CAR0[2]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 2, state 1, dir 1, buttonsPressed: 3 
+Person 20 embarking from floor 1 to car 0
+
+iter=14
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[3]*
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 3, state 6, dir 1, buttonsPressed: 3 
+
+iter=15
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0 CAR0[3]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 3, state 1, dir 1, buttonsPressed: 3 
+
+iter=16
+new person 11 arriving on floor 2, dest=4
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1 CAR0[3]^
+FLOOR 2, persons 1, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 3, state 1, dir 1, buttonsPressed: 3 
+Person 17 disembarking from car 0 to floor 3 time 16
+Person 40 disembarking from car 0 to floor 3 time 16
+Person 20 disembarking from car 0 to floor 3 time 16
+
+iter=17
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1 CAR0[0]*
+FLOOR 2, persons 1, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 0, state 6, dir 1, buttonsPressed: 
+
+iter=18
+new person 32 arriving on floor 2, dest=3
+FLOOR 4, persons 1, up 0, down 1 CAR0[0]^
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 2, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 4, load 0, state 1, dir 1, buttonsPressed: 
+Person 13 embarking from floor 4 to car 0
+
+iter=19
+FLOOR 4, persons 0, up 0, down 0 CAR0[1]*
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 2, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 4, load 1, state 6, dir 0, buttonsPressed: 1 
+
+iter=20
+new person 14 arriving on floor 4, dest=1
+new person 31 arriving on floor 2, dest=0
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1 CAR0[1]v
+FLOOR 2, persons 3, up 1, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 1, state 1, dir 0, buttonsPressed: 1 
+Person 10 embarking from floor 3 to car 0
+Person 4 embarking from floor 3 to car 0
+
+iter=21
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0 CAR0[3]*
+FLOOR 2, persons 3, up 1, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 3, state 6, dir 0, buttonsPressed: 0 1 2 
+
+iter=22
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 3, up 1, down 1 CAR0[3]v
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 3, state 1, dir 0, buttonsPressed: 0 1 2 
+Person 4 disembarking from car 0 to floor 2 time 22
+Person 31 embarking from floor 2 to car 0
+
+iter=23
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 2, up 1, down 0 CAR0[3]*
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 3, state 6, dir 0, buttonsPressed: 0 1 
+
+iter=24
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 2, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[3]v
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 3, state 1, dir 0, buttonsPressed: 0 1 
+Person 13 disembarking from car 0 to floor 1 time 24
+
+iter=25
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 2, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 2, state 6, dir 0, buttonsPressed: 0 
+
+iter=26
+new person 41 arriving on floor 4, dest=3
+FLOOR 4, persons 2, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 2, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[2]v
+CAR 0, floor 0, load 2, state 1, dir 0, buttonsPressed: 0 
+Person 10 disembarking from car 0 to floor 0 time 26
+Person 31 disembarking from car 0 to floor 0 time 26
+
+iter=27
+new person 46 arriving on floor 4, dest=2
+FLOOR 4, persons 3, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 2, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[0]*
+CAR 0, floor 0, load 0, state 6, dir 1, buttonsPressed: 
+
+iter=28
+new person 3 arriving on floor 0, dest=3
+FLOOR 4, persons 3, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 2, up 1, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[0]^
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 1, load 0, state 1, dir 1, buttonsPressed: 
+
+iter=29
+FLOOR 4, persons 3, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 2, up 1, down 0 CAR0[0]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 0, state 1, dir 1, buttonsPressed: 
+Person 11 embarking from floor 2 to car 0
+Person 32 embarking from floor 2 to car 0
+
+iter=30
+new person 12 arriving on floor 4, dest=3
+FLOOR 4, persons 4, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 2, state 6, dir 1, buttonsPressed: 3 4 
+
+iter=31
+new person 36 arriving on floor 3, dest=4
+FLOOR 4, persons 4, up 0, down 1
+FLOOR 3, persons 1, up 1, down 0 CAR0[2]^
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 2, state 1, dir 1, buttonsPressed: 3 4 
+Person 32 disembarking from car 0 to floor 3 time 31
+Person 36 embarking from floor 3 to car 0
+
+iter=32
+FLOOR 4, persons 4, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 2, state 6, dir 1, buttonsPressed: 4 
+
+iter=33
+FLOOR 4, persons 4, up 0, down 1 CAR0[2]^
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 2, state 1, dir 1, buttonsPressed: 4 
+Person 11 disembarking from car 0 to floor 4 time 33
+Person 36 disembarking from car 0 to floor 4 time 33
+Person 14 embarking from floor 4 to car 0
+Person 41 embarking from floor 4 to car 0
+Person 46 embarking from floor 4 to car 0
+Person 12 embarking from floor 4 to car 0
+
+iter=34
+new person 25 arriving on floor 2, dest=1
+FLOOR 4, persons 0, up 0, down 0 CAR0[4]*
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 1, up 0, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 4, state 6, dir 0, buttonsPressed: 1 2 3 
+
+iter=35
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[4]v
+FLOOR 2, persons 1, up 0, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 4, state 1, dir 0, buttonsPressed: 1 2 3 
+Person 41 disembarking from car 0 to floor 3 time 35
+Person 12 disembarking from car 0 to floor 3 time 35
+
+iter=36
+new person 26 arriving on floor 0, dest=3
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 2, persons 1, up 0, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 3, load 2, state 6, dir 0, buttonsPressed: 1 2 
+
+iter=37
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 1, up 0, down 1 CAR0[2]v
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 2, load 2, state 1, dir 0, buttonsPressed: 1 2 
+Person 46 disembarking from car 0 to floor 2 time 37
+Person 25 embarking from floor 2 to car 0
+
+iter=38
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 2, load 2, state 6, dir 0, buttonsPressed: 1 
+
+iter=39
+new person 48 arriving on floor 3, dest=1
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[2]v
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 1, load 2, state 1, dir 0, buttonsPressed: 1 
+Person 14 disembarking from car 0 to floor 1 time 39
+Person 25 disembarking from car 0 to floor 1 time 39
+
+iter=40
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[0]*
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 1, load 0, state 6, dir 0, buttonsPressed: 
+
+iter=41
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 2, up 1, down 0 CAR0[0]v
+CAR 0, floor 0, load 0, state 1, dir 0, buttonsPressed: 
+Person 3 embarking from floor 0 to car 0
+Person 26 embarking from floor 0 to car 0
+
+iter=42
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[2]*
+CAR 0, floor 0, load 2, state 6, dir 1, buttonsPressed: 3 
+
+iter=43
+new person 35 arriving on floor 3, dest=4
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 2, up 1, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[2]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 2, state 1, dir 1, buttonsPressed: 3 
+
+iter=44
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 2, up 1, down 1
+FLOOR 2, persons 0, up 0, down 0 CAR0[2]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 2, state 1, dir 1, buttonsPressed: 3 
+
+iter=45
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 2, up 1, down 1 CAR0[2]^
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 2, state 1, dir 1, buttonsPressed: 3 
+Person 3 disembarking from car 0 to floor 3 time 45
+Person 26 disembarking from car 0 to floor 3 time 45
+Person 35 embarking from floor 3 to car 0
+
+iter=46
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1 CAR0[1]*
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 1, state 6, dir 1, buttonsPressed: 4 
+
+iter=47
+new person 44 arriving on floor 0, dest=2
+FLOOR 4, persons 0, up 0, down 0 CAR0[1]^
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 1, state 1, dir 1, buttonsPressed: 4 
+Person 35 disembarking from car 0 to floor 4 time 47
+
+iter=48
+FLOOR 4, persons 0, up 0, down 0 CAR0[0]*
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 0, state 6, dir 0, buttonsPressed: 
+
+iter=49
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1 CAR0[0]v
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 0, state 1, dir 0, buttonsPressed: 
+Person 48 embarking from floor 3 to car 0
+
+iter=50
+new person 39 arriving on floor 0, dest=3
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[1]*
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 3, load 1, state 6, dir 0, buttonsPressed: 1 
+
+iter=51
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[1]v
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 2, load 1, state 1, dir 0, buttonsPressed: 1 
+
+iter=52
+new person 38 arriving on floor 4, dest=0
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[1]v
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 1, load 1, state 1, dir 0, buttonsPressed: 1 
+Person 48 disembarking from car 0 to floor 1 time 52
+
+iter=53
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[0]*
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 1, load 0, state 6, dir 0, buttonsPressed: 
+
+iter=54
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 2, up 1, down 0 CAR0[0]v
+CAR 0, floor 0, load 0, state 1, dir 0, buttonsPressed: 
+Person 44 embarking from floor 0 to car 0
+Person 39 embarking from floor 0 to car 0
+
+iter=55
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[2]*
+CAR 0, floor 0, load 2, state 6, dir 1, buttonsPressed: 2 3 
+
+iter=56
+new person 43 arriving on floor 4, dest=1
+FLOOR 4, persons 2, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[2]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 2, state 1, dir 1, buttonsPressed: 2 3 
+
+iter=57
+FLOOR 4, persons 2, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[2]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 2, state 1, dir 1, buttonsPressed: 2 3 
+Person 44 disembarking from car 0 to floor 2 time 57
+
+iter=58
+new person 7 arriving on floor 0, dest=2
+FLOOR 4, persons 2, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[1]*
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 1, state 6, dir 1, buttonsPressed: 3 
+
+iter=59
+FLOOR 4, persons 2, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0 CAR0[1]^
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 1, state 1, dir 1, buttonsPressed: 3 
+Person 39 disembarking from car 0 to floor 3 time 59
+
+iter=60
+new person 33 arriving on floor 1, dest=2
+new person 37 arriving on floor 3, dest=0
+FLOOR 4, persons 2, up 0, down 1
+FLOOR 3, persons 1, up 0, down 1 CAR0[0]*
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 0, state 6, dir 1, buttonsPressed: 
+
+iter=61
+new person 19 arriving on floor 1, dest=2
+FLOOR 4, persons 2, up 0, down 1 CAR0[0]^
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 1, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 0, state 1, dir 1, buttonsPressed: 
+Person 38 embarking from floor 4 to car 0
+Person 43 embarking from floor 4 to car 0
+
+iter=62
+FLOOR 4, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 1, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 4, load 2, state 6, dir 0, buttonsPressed: 0 1 
+
+iter=63
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1 CAR0[2]v
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 1, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 2, state 1, dir 0, buttonsPressed: 0 1 
+Person 37 embarking from floor 3 to car 0
+
+iter=64
+new person 1 arriving on floor 0, dest=4
+new person 21 arriving on floor 2, dest=0
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[3]*
+FLOOR 2, persons 1, up 0, down 1
+FLOOR 1, persons 2, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 3, load 3, state 6, dir 0, buttonsPressed: 0 1 
+
+iter=65
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 1, up 0, down 1 CAR0[3]v
+FLOOR 1, persons 2, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 2, load 3, state 1, dir 0, buttonsPressed: 0 1 
+Person 21 embarking from floor 2 to car 0
+
+iter=66
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[4]*
+FLOOR 1, persons 2, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 2, load 4, state 6, dir 0, buttonsPressed: 0 1 
+
+iter=67
+new person 15 arriving on floor 1, dest=2
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 3, up 1, down 0 CAR0[4]v
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 1, load 4, state 1, dir 0, buttonsPressed: 0 1 
+Person 43 disembarking from car 0 to floor 1 time 67
+
+iter=68
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 3, up 1, down 0 CAR0[3]*
+FLOOR 0, persons 2, up 1, down 0
+CAR 0, floor 1, load 3, state 6, dir 0, buttonsPressed: 0 
+
+iter=69
+new person 6 arriving on floor 4, dest=3
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 3, up 1, down 0
+FLOOR 0, persons 2, up 1, down 0 CAR0[3]v
+CAR 0, floor 0, load 3, state 1, dir 0, buttonsPressed: 0 
+Person 38 disembarking from car 0 to floor 0 time 69
+Person 37 disembarking from car 0 to floor 0 time 69
+Person 21 disembarking from car 0 to floor 0 time 69
+Person 7 embarking from floor 0 to car 0
+Person 1 embarking from floor 0 to car 0
+
+iter=70
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 3, up 1, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[2]*
+CAR 0, floor 0, load 2, state 6, dir 1, buttonsPressed: 2 4 
+
+iter=71
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 3, up 1, down 0 CAR0[2]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 2, state 1, dir 1, buttonsPressed: 2 4 
+Person 33 embarking from floor 1 to car 0
+Person 19 embarking from floor 1 to car 0
+Person 15 embarking from floor 1 to car 0
+
+iter=72
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[5]*
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 5, state 6, dir 1, buttonsPressed: 2 4 
+
+iter=73
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[5]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 5, state 1, dir 1, buttonsPressed: 2 4 
+Person 7 disembarking from car 0 to floor 2 time 73
+Person 33 disembarking from car 0 to floor 2 time 73
+Person 19 disembarking from car 0 to floor 2 time 73
+Person 15 disembarking from car 0 to floor 2 time 73
+
+iter=74
+new person 5 arriving on floor 1, dest=0
+new person 49 arriving on floor 3, dest=2
+new person 49 arriving on floor 3, dest=2
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0 CAR0[1]*
+FLOOR 1, persons 1, up 0, down 1
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 1, state 6, dir 1, buttonsPressed: 4 
+
+iter=75
+new person 9 arriving on floor 1, dest=0
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1 CAR0[1]^
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 0, down 1
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 1, state 1, dir 1, buttonsPressed: 4 
+
+iter=76
+new person 27 arriving on floor 3, dest=1
+FLOOR 4, persons 1, up 0, down 1 CAR0[1]^
+FLOOR 3, persons 3, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 0, down 1
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 4, load 1, state 1, dir 1, buttonsPressed: 4 
+Person 1 disembarking from car 0 to floor 4 time 76
+Person 6 embarking from floor 4 to car 0
+
+iter=77
+FLOOR 4, persons 0, up 0, down 0 CAR0[1]*
+FLOOR 3, persons 3, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 0, down 1
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 4, load 1, state 6, dir 0, buttonsPressed: 3 
+
+iter=78
+new person 24 arriving on floor 0, dest=2
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 3, up 0, down 1 CAR0[1]v
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 0, down 1
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 1, state 1, dir 0, buttonsPressed: 3 
+Person 6 disembarking from car 0 to floor 3 time 78
+Person 49 embarking from floor 3 to car 0
+Person 49 embarking from floor 3 to car 0
+Person 27 embarking from floor 3 to car 0
+
+iter=79
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[3]*
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 0, down 1
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 3, load 3, state 6, dir 0, buttonsPressed: 1 2 
+
+iter=80
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[3]v
+FLOOR 1, persons 2, up 0, down 1
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 3, state 1, dir 0, buttonsPressed: 1 2 
+Person 49 disembarking from car 0 to floor 2 time 80
+Person 49 disembarking from car 0 to floor 2 time 80
+
+iter=81
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[1]*
+FLOOR 1, persons 2, up 0, down 1
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 1, state 6, dir 0, buttonsPressed: 1 
+
+iter=82
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 0, down 1 CAR0[1]v
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 1, load 1, state 1, dir 0, buttonsPressed: 1 
+Person 27 disembarking from car 0 to floor 1 time 82
+Person 5 embarking from floor 1 to car 0
+Person 9 embarking from floor 1 to car 0
+
+iter=83
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[2]*
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 1, load 2, state 6, dir 0, buttonsPressed: 0 
+
+iter=84
+new person 8 arriving on floor 3, dest=0
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0 CAR0[2]v
+CAR 0, floor 0, load 2, state 1, dir 0, buttonsPressed: 0 
+Person 5 disembarking from car 0 to floor 0 time 84
+Person 9 disembarking from car 0 to floor 0 time 84
+Person 24 embarking from floor 0 to car 0
+
+iter=85
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[1]*
+CAR 0, floor 0, load 1, state 6, dir 1, buttonsPressed: 2 
+
+iter=86
+new person 18 arriving on floor 3, dest=0
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0 CAR0[1]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 1, state 1, dir 1, buttonsPressed: 2 
+
+iter=87
+new person 47 arriving on floor 4, dest=2
+FLOOR 4, persons 1, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0 CAR0[1]^
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 1, state 1, dir 1, buttonsPressed: 2 
+Person 24 disembarking from car 0 to floor 2 time 87
+
+iter=88
+new person 0 arriving on floor 4, dest=0
+FLOOR 4, persons 2, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0 CAR0[0]*
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 0, state 6, dir 1, buttonsPressed: 
+
+iter=89
+new person 23 arriving on floor 4, dest=3
+FLOOR 4, persons 3, up 0, down 1
+FLOOR 3, persons 2, up 0, down 1 CAR0[0]^
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 0, state 1, dir 1, buttonsPressed: 
+
+iter=90
+new person 34 arriving on floor 4, dest=3
+FLOOR 4, persons 4, up 0, down 1 CAR0[0]^
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 4, load 0, state 1, dir 1, buttonsPressed: 
+Person 47 embarking from floor 4 to car 0
+Person 0 embarking from floor 4 to car 0
+Person 23 embarking from floor 4 to car 0
+Person 34 embarking from floor 4 to car 0
+
+iter=91
+new person 16 arriving on floor 2, dest=0
+FLOOR 4, persons 0, up 0, down 0 CAR0[4]*
+FLOOR 3, persons 2, up 0, down 1
+FLOOR 2, persons 1, up 0, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 4, load 4, state 6, dir 0, buttonsPressed: 0 2 3 
+
+iter=92
+new person 28 arriving on floor 3, dest=0
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 3, up 0, down 1 CAR0[4]v
+FLOOR 2, persons 1, up 0, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 4, state 1, dir 0, buttonsPressed: 0 2 3 
+Person 23 disembarking from car 0 to floor 3 time 92
+Person 34 disembarking from car 0 to floor 3 time 92
+Person 8 embarking from floor 3 to car 0
+Person 18 embarking from floor 3 to car 0
+Person 28 embarking from floor 3 to car 0
+
+iter=93
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0 CAR0[5]*
+FLOOR 2, persons 1, up 0, down 1
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 3, load 5, state 6, dir 0, buttonsPressed: 0 2 
+
+iter=94
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 1, up 0, down 1 CAR0[5]v
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 2, load 5, state 1, dir 0, buttonsPressed: 0 2 
+Person 47 disembarking from car 0 to floor 2 time 94
+Person 16 embarking from floor 2 to car 0
+
+iter=95
+new person 45 arriving on floor 0, dest=1
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0 CAR0[5]*
+FLOOR 1, persons 0, up 0, down 0
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 2, load 5, state 6, dir 0, buttonsPressed: 0 
+
+iter=96
+new person 42 arriving on floor 1, dest=2
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0 CAR0[5]v
+FLOOR 0, persons 1, up 1, down 0
+CAR 0, floor 1, load 5, state 1, dir 0, buttonsPressed: 0 
+
+iter=97
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 0, up 0, down 0
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 1, up 1, down 0
+FLOOR 0, persons 1, up 1, down 0 CAR0[5]v
+CAR 0, floor 0, load 5, state 1, dir 0, buttonsPressed: 0 
+Person 0 disembarking from car 0 to floor 0 time 97
+Person 8 disembarking from car 0 to floor 0 time 97
+Person 18 disembarking from car 0 to floor 0 time 97
+Person 28 disembarking from car 0 to floor 0 time 97
+Person 16 disembarking from car 0 to floor 0 time 97
+Person 45 embarking from floor 0 to car 0
+
+iter=98
+new person 22 arriving on floor 3, dest=1
+new person 29 arriving on floor 1, dest=2
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 1, down 0
+FLOOR 0, persons 0, up 0, down 0 CAR0[1]*
+CAR 0, floor 0, load 1, state 6, dir 1, buttonsPressed: 1 
+
+iter=99
+FLOOR 4, persons 0, up 0, down 0
+FLOOR 3, persons 1, up 0, down 1
+FLOOR 2, persons 0, up 0, down 0
+FLOOR 1, persons 2, up 1, down 0 CAR0[1]^
+FLOOR 0, persons 0, up 0, down 0
+CAR 0, floor 1, load 1, state 1, dir 1, buttonsPressed: 1 
+Person 45 disembarking from car 0 to floor 1 time 99
+Person 42 embarking from floor 1 to car 0
+Person 29 embarking from floor 1 to car 0
+summary
+on floor 3: PERSON id 22 src 3 dest 1 start 98 embarked -1 arrived -1 WAITING on FLOOR 3
+in car 0: PERSON id 42 src 1 dest 2 start 96 embarked 99 arrived -1
+in car 0: PERSON id 29 src 1 dest 2 start 98 embarked 99 arrived -1
+PERSON id 17 src 0 dest 3 start 2 embarked 11 arrived 16 ARRIVED traveltime 14
+PERSON id 30 src 4 dest 3 start 3 embarked 4 arrived 6 ARRIVED traveltime 3
+PERSON id 2 src 4 dest 2 start 4 embarked 4 arrived 8 ARRIVED traveltime 4
+PERSON id 20 src 1 dest 3 start 5 embarked 13 arrived 16 ARRIVED traveltime 11
+PERSON id 40 src 0 dest 3 start 6 embarked 11 arrived 16 ARRIVED traveltime 10
+PERSON id 10 src 3 dest 0 start 9 embarked 20 arrived 26 ARRIVED traveltime 17
+PERSON id 13 src 4 dest 1 start 10 embarked 18 arrived 24 ARRIVED traveltime 14
+PERSON id 4 src 3 dest 2 start 10 embarked 20 arrived 22 ARRIVED traveltime 12
+PERSON id 11 src 2 dest 4 start 16 embarked 29 arrived 33 ARRIVED traveltime 17
+PERSON id 32 src 2 dest 3 start 18 embarked 29 arrived 31 ARRIVED traveltime 13
+PERSON id 14 src 4 dest 1 start 20 embarked 33 arrived 39 ARRIVED traveltime 19
+PERSON id 31 src 2 dest 0 start 20 embarked 22 arrived 26 ARRIVED traveltime 6
+PERSON id 41 src 4 dest 3 start 26 embarked 33 arrived 35 ARRIVED traveltime 9
+PERSON id 46 src 4 dest 2 start 27 embarked 33 arrived 37 ARRIVED traveltime 10
+PERSON id 3 src 0 dest 3 start 28 embarked 41 arrived 45 ARRIVED traveltime 17
+PERSON id 12 src 4 dest 3 start 30 embarked 33 arrived 35 ARRIVED traveltime 5
+PERSON id 36 src 3 dest 4 start 31 embarked 31 arrived 33 ARRIVED traveltime 2
+PERSON id 25 src 2 dest 1 start 34 embarked 37 arrived 39 ARRIVED traveltime 5
+PERSON id 26 src 0 dest 3 start 36 embarked 41 arrived 45 ARRIVED traveltime 9
+PERSON id 48 src 3 dest 1 start 39 embarked 49 arrived 52 ARRIVED traveltime 13
+PERSON id 35 src 3 dest 4 start 43 embarked 45 arrived 47 ARRIVED traveltime 4
+PERSON id 44 src 0 dest 2 start 47 embarked 54 arrived 57 ARRIVED traveltime 10
+PERSON id 39 src 0 dest 3 start 50 embarked 54 arrived 59 ARRIVED traveltime 9
+PERSON id 38 src 4 dest 0 start 52 embarked 61 arrived 69 ARRIVED traveltime 17
+PERSON id 43 src 4 dest 1 start 56 embarked 61 arrived 67 ARRIVED traveltime 11
+PERSON id 7 src 0 dest 2 start 58 embarked 69 arrived 73 ARRIVED traveltime 15
+PERSON id 33 src 1 dest 2 start 60 embarked 71 arrived 73 ARRIVED traveltime 13
+PERSON id 37 src 3 dest 0 start 60 embarked 63 arrived 69 ARRIVED traveltime 9
+PERSON id 19 src 1 dest 2 start 61 embarked 71 arrived 73 ARRIVED traveltime 12
+PERSON id 1 src 0 dest 4 start 64 embarked 69 arrived 76 ARRIVED traveltime 12
+PERSON id 21 src 2 dest 0 start 64 embarked 65 arrived 69 ARRIVED traveltime 5
+PERSON id 15 src 1 dest 2 start 67 embarked 71 arrived 73 ARRIVED traveltime 6
+PERSON id 6 src 4 dest 3 start 69 embarked 76 arrived 78 ARRIVED traveltime 9
+PERSON id 49 src 3 dest 2 start 74 embarked 78 arrived 80 ARRIVED traveltime 6
+PERSON id 49 src 3 dest 2 start 74 embarked 78 arrived 80 ARRIVED traveltime 6
+PERSON id 5 src 1 dest 0 start 74 embarked 82 arrived 84 ARRIVED traveltime 10
+PERSON id 9 src 1 dest 0 start 75 embarked 82 arrived 84 ARRIVED traveltime 9
+PERSON id 27 src 3 dest 1 start 76 embarked 78 arrived 82 ARRIVED traveltime 6
+PERSON id 24 src 0 dest 2 start 78 embarked 84 arrived 87 ARRIVED traveltime 9
+PERSON id 8 src 3 dest 0 start 84 embarked 92 arrived 97 ARRIVED traveltime 13
+PERSON id 18 src 3 dest 0 start 86 embarked 92 arrived 97 ARRIVED traveltime 11
+PERSON id 47 src 4 dest 2 start 87 embarked 90 arrived 94 ARRIVED traveltime 7
+PERSON id 0 src 4 dest 0 start 88 embarked 90 arrived 97 ARRIVED traveltime 9
+PERSON id 23 src 4 dest 3 start 89 embarked 90 arrived 92 ARRIVED traveltime 3
+PERSON id 34 src 4 dest 3 start 90 embarked 90 arrived 92 ARRIVED traveltime 2
+PERSON id 16 src 2 dest 0 start 91 embarked 94 arrived 97 ARRIVED traveltime 6
+PERSON id 28 src 3 dest 0 start 92 embarked 92 arrived 97 ARRIVED traveltime 5
+PERSON id 45 src 0 dest 1 start 95 embarked 97 arrived 99 ARRIVED traveltime 4
