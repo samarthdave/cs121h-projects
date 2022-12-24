@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string> // stoi
 
 #include "Building.hpp"
@@ -8,8 +7,7 @@ using namespace std;
 int main(int argc, char ** argv) {
   // elevator <timesteps> <floors> <car> <trafficfile>
   if (argc != 5) {
-    cerr << "Invalid input. Enter 4 options." << endl;
-    cerr << "eg. \"./elevator <timesteps> <floors> <car> <trafficfile>\"" << endl;
+    fprintf(stderr, "Invalid input. Enter 4 options.\neg. \"./elevator <timesteps> <floors> <car> <trafficfile>\"");
     exit(1);
   }
 

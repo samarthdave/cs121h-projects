@@ -19,10 +19,10 @@ public:
   int arriveTime; // arriving at destination floor
 // (more) public members
   Person(int i, int Time, int src, int dest);
-  bool operator==(const Person &p); // based on id, to check if 2 persons are same
-  bool operator<(const Person &) const; // based on start time, for sorting
-  void setEmbarkTime(int x);
-  void setArriveTime(int x);
+  bool operator==(const Person&); // based on id, to check if 2 persons are same
+  bool operator<(const Person&) const; // based on start time, for sorting
+  void setEmbarkTime(int);
+  void setArriveTime(int);
   Dir dir(); // what direction are they travelling?
   std::string toString();
   void print(); // calls toString

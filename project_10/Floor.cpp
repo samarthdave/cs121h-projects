@@ -1,4 +1,3 @@
-#include <iostream>
 #include <sstream>
 
 #include "Floor.hpp"
@@ -30,8 +29,7 @@ void Floor::AddPerson(Person p) {
   } else {
     PressUp();
   }
-  cout << "new person " << p.id << " arriving on floor " << id;
-  cout << ", dest=" << p.dest << endl;
+  printf("new person %d arriving on floor %d, dest=%d\n", p.id, this->id, p.dest);
 }
 
 // eg. "FLOOR 1, persons 0, up 0, down 0"
@@ -54,7 +52,7 @@ string Floor::toString() {
 // from run()
 void Floor::summary() {
   for (auto p: persons) {
-    cout << "on floor " << id << ": ";
+    printf("on floor %d: ", id);
     p.print();
   }
 }

@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 
 #include "Person.hpp"
@@ -26,7 +25,7 @@ public:
   Building(int numiters, int numfloors, int numcars, string fname);
   void AddPerson(Person);
   void RemovePerson(Person);
-  void readin_traffic(string &);
+  void readin_traffic(string&);
   void NewArrivals(int); // check for person whose start time has arrived
   void summary(); // print-out all persons, cars, and floors at end
   void run();

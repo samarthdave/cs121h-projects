@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "Person.hpp"
 
 using namespace std;
@@ -16,30 +14,26 @@ Person::Person(int i, int Time, int s, int d) {
 }
 
 // are 2 objects the same (based on id?)
-bool Person::operator==(const Person &p) {
+bool Person::operator==(const Person& p) {
   return (this->id == p.id);
 }
 
 // comparison used for sorting based on start time in summary
-bool Person::operator<(const Person &p) const {
+bool Person::operator<(const Person& p) const {
   return this->start < p.start;
 }
 
 void Person::print() {
-  cout << "PERSON id " << id;
-  cout << " src " << src; // start floor
-  cout << " dest " << dest; // destination floor
-  cout << " start " << start; // when they pressed
-  cout << " embarked " << embarkTime; // when elevator arrived
-  cout << " arrived " << arriveTime; // when car dropped them
+  // start: when they pressed, embark: when elevator arrived, arrive when car dropped them
   // ARRIVED - is the person still on the elevator when simulation ends?
+  printf("PERSON id %d src %d dest %d start %d embarked %d arrived %d", id, src, dest, start, embarkTime, arriveTime);
   if (embarkTime == -1) {
-    cout << " WAITING on FLOOR " << src;
+    printf(" WAITING on FLOOR %d", src);
   }
   if (arriveTime != -1) {
-    cout << " ARRIVED traveltime " << (arriveTime - start);
+    printf(" ARRIVED traveltime %d", arriveTime - start);
   }
-  cout << endl;
+  printf("\n");
 }
 
 Dir Person::dir() {

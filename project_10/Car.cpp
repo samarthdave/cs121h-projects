@@ -46,21 +46,16 @@ string Car::toString() {
 
 // printSymbolic returns car information (eg. "CAR0[3]^")
 void Car::printSymbolic() {
-  stringstream ss;
-  // car number
-  int personCount = this->persons.size();
-  ss << "CAR" << (this->id) << "[" << personCount << "]";
   // car direction
   char token = '*';
   if (state == MOVING) {
-    if (dir == UP) { token = '^'; }
-    else { token = 'v'; }
+    token = dir == UP ? '^' : 'v';
   }
-  ss << token;
-  cout << " " << ss.str();
+  // ex: "CAR1[0]v" or "CAR3[10]^"
+  printf(" CAR%d[%d]%c", this->id, (int) this->persons.size(), token);
 }
 
-void Car::update(vector<Floor> &f4, int iter, vector<Person> &allPersons) {
+void Car::update(vector<Floor>& f4, int iter, vector<Person>& allPersons) {
   if (floor == nfloors - 1){
     dir = DOWN;
   }
@@ -76,10 +71,8 @@ void Car::update(vector<Floor> &f4, int iter, vector<Person> &allPersons) {
   if (dir == DOWN && f4[floor].DownPressed()) {
     load = true;
   }
-  int moveDirection = 0;
   // set direction for push size
-  if (dir == UP) moveDirection = 1;
-  else moveDirection = -1;
+  int moveDirection = dir == UP ? 1 : -1;
   
   if (!(unload || load)) {
     state = MOVING;
@@ -98,7 +91,7 @@ void Car::update(vector<Floor> &f4, int iter, vector<Person> &allPersons) {
 }
 
 // put ppl onto the elevator car
-void Car::embark(Floor &f2, int iter) {
+void Car::embark(Floor& f2, int iter) {
   vector<Person> load;
   if (dir == UP) {
     load = f2.filter(UP); // user filter method for specific Dir
@@ -114,19 +107,16 @@ void Car::embark(Floor &f2, int iter) {
     AddPerson(p4);
     Press(p4.dest);
     // pretty print
-    cout << "Person " << p4.id << " embarking from floor ";
-    cout << floor << " to car " << id << endl;
+    printf("Person %d embarking from floor %d to car %d\n", p4.id, floor, id);
   }
 }
 
 // remove ppl from the elevator
-void Car::disembark(Floor f3, int iter, vector<Person> &allPersons) {
+void Car::disembark(Floor f3, int iter, vector<Person>& allPersons) {
   Reset(floor);
   for (vector<Person>::iterator i1 = persons.begin(); i1 != persons.end(); i1++) {
     if (i1->dest == floor) {
-      cout << "Person " << i1->id << " disembarking from car ";
-      cout << id << " to floor " << floor;
-      cout << " time " << iter << endl;
+      printf("Person %d disembarking from car %d to floor %d time %d\n", i1->id, id, floor, iter);
 
       i1->setArriveTime(iter);
       allPersons.push_back(*i1);
@@ -138,7 +128,7 @@ void Car::disembark(Floor f3, int iter, vector<Person> &allPersons) {
 
 void Car::summary() {
   for (auto p5: persons) {
-    cout << "in car " << id << ": ";
+    printf("in car %d: ", this->id);
     p5.print();
   }
 }

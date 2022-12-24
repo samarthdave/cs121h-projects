@@ -1,4 +1,3 @@
-#include <iostream>
 #include <vector>
 #include <fstream>
 #include <sstream>
@@ -31,13 +30,13 @@ Building::Building(int numiters, int numfloors, int numcars, string fname) {
 }
 
 // read in file & make Person instances from it
-void Building::readin_traffic(string &fname) {
+void Building::readin_traffic(string& fname) {
   // check if valid file
   fstream file;
   file.open(fname);
 
   if(!file.is_open()) {
-    cerr << "Error opening \"" << fname << "\"." << endl;
+    fprintf(stderr, "Error opening \"%s\".\n", fname.c_str());
     exit(1);
   }
 
@@ -54,10 +53,8 @@ void Building::readin_traffic(string &fname) {
     int id, timeIndex, src, dest;
     // PERSON id 1 time 24 src 1 dest 2
     if (!(iss >> a >> a >> id >> a >> timeIndex >> a >> src >> a >> dest)) {
-      cerr << "Error reading file: " << fname << endl;
-      cerr << "Error reading in line: " << endl;
-
-      cout << line << "\n" << string(20, '-') << endl;
+      fprintf(stderr, "Error reading file: %s\n Error reading in line: %s\n", fname.c_str(), line.c_str());
+      printf("====================");
       exit(1);
     } // error
 
@@ -72,20 +69,20 @@ void Building::run() {
   int C = this->ncars;
 
   for (int iter = 0; iter < this->ITERS; iter++) {
-    cout << endl << "iter=" << iter << endl;
+    printf("\niter=%d\n", iter);
     // check for Persons whose start time is now, move to source floor
     NewArrivals(iter);
 
     // print out contents of floors and cars
     for (int i = 0; i < nfloors; i++) {
       int f = nfloors - i - 1;
-      cout << floors[f].toString();
+      printf("%s", floors[f].toString().c_str());
       for (int j = 0; j < C; j++) // prints car status (ex. CAR0[3]^)
         if (cars[j].floor == f) cars[j].printSymbolic();
-      cout << endl;
+      printf("\n");
     }
     // print out car state (floor, count)
-    for (int i = 0; i < C; i++) cout << cars[i].toString() << endl;
+    for (int i = 0; i < C; i++) printf("%s\n", cars[i].toString().c_str());
 
     // update cars
     for (int i = 0; i < C; i++) cars[i].update(floors, iter, persons);
@@ -113,14 +110,14 @@ void Building::RemovePerson(Person p) {
   persons.erase(find(persons.begin(), persons.end(), p));
 }
 
-bool compare_func(const Person &p, const Person &q) {
+bool compare_func(const Person& p, const Person& q) {
   return p < q;
 };
 
 void Building::summary() {
   // build a lambda compare function for sorting
   sort(persons.begin(), persons.end(), compare_func);
-  cout << "summary" << endl;
+  printf("summary\n");
   // print summary of all components
   for (auto floor : floors) {
     floor.summary();
