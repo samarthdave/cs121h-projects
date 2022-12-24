@@ -86,7 +86,6 @@ void Building::run() {
     }
     // print out car state (floor, count)
     for (int i = 0; i < C; i++) cout << cars[i].toString() << endl;
-    cout << string(20, '-') << endl;
 
     // update cars
     for (int i = 0; i < C; i++) cars[i].update(floors, iter, persons);
@@ -121,8 +120,7 @@ bool compare_func(const Person &p, const Person &q) {
 void Building::summary() {
   // build a lambda compare function for sorting
   sort(persons.begin(), persons.end(), compare_func);
-  cout << string(20, '-') << endl;
-  cout << "SUMMARY" << endl;
+  cout << "summary" << endl;
   // print summary of all components
   for (auto floor : floors) {
     floor.summary();
@@ -133,5 +131,4 @@ void Building::summary() {
   for(auto person: persons) {
     person.print();
   }
-  cout << string(20, '-') << endl;
 }

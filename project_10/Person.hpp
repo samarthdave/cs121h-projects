@@ -1,4 +1,4 @@
-using namespace std;
+#include <string>
 
 #ifndef _Person_hpp
 #define _Person_hpp
@@ -24,7 +24,7 @@ public:
   void setEmbarkTime(int x);
   void setArriveTime(int x);
   Dir dir(); // what direction are they travelling?
-  string toString();
+  std::string toString();
   void print(); // calls toString
 };
 

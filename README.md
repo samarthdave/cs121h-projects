@@ -1,5 +1,5 @@
 # CS121 Projects
-My projects/submissions for CSCE 121 H
+My projects/submissions for [CSCE 121 H](https://people.engr.tamu.edu/ioerger/cs121h-fall19/index.html)
 
 > Live as if you were to die tomorrow. Learn as if you were to live forever.
 

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip> // string formatting
 
 #include "Person.hpp"
 
@@ -27,18 +26,18 @@ bool Person::operator<(const Person &p) const {
 }
 
 void Person::print() {
-  cout << "PERSON id " << setw(3) << id << " ";
-  cout << " src " << setw(3) << src; // start floor
-  cout << " dest " << setw(3) << dest; // destination floor
-  cout << " start " << setw(3) << start; // when they pressed
-  cout << " embarked " << setw(3) << embarkTime; // when elevator arrived
-  cout << " arrived " << setw(3) << arriveTime << " "; // when car dropped them
+  cout << "PERSON id " << id;
+  cout << " src " << src; // start floor
+  cout << " dest " << dest; // destination floor
+  cout << " start " << start; // when they pressed
+  cout << " embarked " << embarkTime; // when elevator arrived
+  cout << " arrived " << arriveTime; // when car dropped them
   // ARRIVED - is the person still on the elevator when simulation ends?
   if (embarkTime == -1) {
-    cout << "WAITING on FLOOR " << src;
+    cout << " WAITING on FLOOR " << src;
   }
   if (arriveTime != -1) {
-    cout << "ARRIVED traveltime " << (arriveTime - start);
+    cout << " ARRIVED traveltime " << (arriveTime - start);
   }
   cout << endl;
 }

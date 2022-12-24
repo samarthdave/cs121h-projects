@@ -1,6 +1,5 @@
 #include <vector>
 #include <sstream>
-#include <iomanip>
 
 #include "Car.hpp"
 
@@ -31,7 +30,7 @@ string Car::toString() {
   // CAR 0, floor 1, load 0, state 1, dir 1, buttonsPressed: 
   stringstream ss;
 
-  ss << "CAR " << id << ", " << " floor " << floor;
+  ss << "CAR " << id << ", floor " << floor;
   ss << ", load " << persons.size();
   ss << ", state " << state;
   ss << ", dir " << dir;
@@ -39,7 +38,7 @@ string Car::toString() {
   ss << ", buttonsPressed: ";
   for (int i = 0; i < nfloors; i++) {
     if (buttons[i])
-      ss << i << " ";
+      ss << i << ' ';
   }
 
   return ss.str();
@@ -115,8 +114,8 @@ void Car::embark(Floor &f2, int iter) {
     AddPerson(p4);
     Press(p4.dest);
     // pretty print
-    cout << "Person " << setw(2) << p4.id << " embarking from floor ";
-    cout << setw(2) << floor << " to car " << id << endl;
+    cout << "Person " << p4.id << " embarking from floor ";
+    cout << floor << " to car " << id << endl;
   }
 }
 
@@ -125,8 +124,8 @@ void Car::disembark(Floor f3, int iter, vector<Person> &allPersons) {
   Reset(floor);
   for (vector<Person>::iterator i1 = persons.begin(); i1 != persons.end(); i1++) {
     if (i1->dest == floor) {
-      cout << "Person " << setw(2) << i1->id << " disembarking from car ";
-      cout << setw(2) << id << " to floor " << setw(2) << floor;
+      cout << "Person " << i1->id << " disembarking from car ";
+      cout << id << " to floor " << floor;
       cout << " time " << iter << endl;
 
       i1->setArriveTime(iter);

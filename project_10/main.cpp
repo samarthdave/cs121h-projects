@@ -7,7 +7,7 @@ using namespace std;
 
 int main(int argc, char ** argv) {
   // elevator <timesteps> <floors> <car> <trafficfile>
-  if (false) { // argc != 5) {
+  if (argc != 5) {
     cerr << "Invalid input. Enter 4 options." << endl;
     cerr << "eg. \"./elevator <timesteps> <floors> <car> <trafficfile>\"" << endl;
     exit(1);

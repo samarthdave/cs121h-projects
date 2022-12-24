@@ -1,41 +1,28 @@
 CC = g++
 F1 = --std=c++11
 
-all: elevator move
+all: elevator
 
-elevator: main.o Container.o Building.o Floor.o Car.o Person.o
-	$(CC) $(F1) -o elevator main.o Container.o Building.o Floor.o Car.o Person.o
+elevator: build/main.o build/Container.o build/Building.o build/Floor.o build/Car.o build/Person.o
+	$(CC) $(F1) -o ./build/$@ $^
 
-main.o: main.cpp Building.hpp
-	$(CC) $(F1) -c main.cpp
+build/main.o: main.cpp Building.hpp
+	$(CC) $(F1) -c main.cpp -o $@
 
-Container.o: Container.cpp Container.hpp
-	$(CC) $(F1) -c Container.cpp
+build/Container.o: Container.cpp Container.hpp
+	$(CC) $(F1) -c Container.cpp -o $@
 
-Building.o: Building.cpp Building.hpp
-	$(CC) $(F1) -c Building.cpp
+build/Building.o: Building.cpp Building.hpp
+	$(CC) $(F1) -c Building.cpp -o $@
 
-Floor.o: Floor.cpp Floor.hpp
-	$(CC) $(F1) -c Floor.cpp
+build/Floor.o: Floor.cpp Floor.hpp
+	$(CC) $(F1) -c Floor.cpp -o $@
 
-Car.o: Car.cpp Car.hpp
-	$(CC) $(F1) -c Car.cpp
+build/Car.o: Car.cpp Car.hpp
+	$(CC) $(F1) -c Car.cpp -o $@
 
-Person.o: Person.cpp Person.hpp
-	$(CC) $(F1) -c Person.cpp
-
-move:
-	@echo "--------------------------"
-	@echo "Moving files from working"
-	@echo "directory to ./build/"
-	@echo "--------------------------"
-	mkdir -p build
-	mv *.o ./build
-	mv elevator ./build
-	@echo "--------------------------"
-	@echo 'type "make run" to execute'
-	@echo "or use './build/elevator'"
-	@echo "--------------------------"
+build/Person.o: Person.cpp Person.hpp
+	$(CC) $(F1) -c Person.cpp -o $@
 
 run:
 	@echo "Running elevator:"
@@ -44,4 +31,4 @@ run:
 # phony assumes the file is always out of date
 .PHONY: clean
 clean:
-	rm *.o
+	rm build/*
